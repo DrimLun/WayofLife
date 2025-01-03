@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="WayofLife.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WayofLife"
+    Title="Way of Life"
+    Shell.FlyoutBehavior="Flyout">
+    <!--  Have to enable flyout in shell  -->
+
+    <!--<ContentPage.MenuBarItems>
+        <MenuBarItem Text="Help" />
+    </ContentPage.MenuBarItems>-->
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Journal"
+        ContentTemplate="{DataTemplate local:Pages.JournalPage}"
+        Route="JournalPage" />
+
+    <!--<ShellContent
+        Title="AddJournal"
+        ContentTemplate="{DataTemplate local:Pages.AddJournal}"
+        Route="" />-->
+
+    <!--<FlyoutItem Title="Home">
+        <Tab>
+        <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Journal">
+        <Tab>
+
+        </Tab>
+    </FlyoutItem>-->
+
+</Shell>

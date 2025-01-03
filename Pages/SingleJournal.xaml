@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WayofLifev2.Pages.SingleJournal"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="SingleJournal">
+    <VerticalStackLayout>
+
+        <StackLayout>
+            <Label x:Name="lblTitle" Text="" />
+        </StackLayout>
+
+
+        <Label x:Name="lblDateTime" Text="" />
+
+        <Label x:Name="lblContent" Text="" />
+
+        <!--<Image />-->
+
+    </VerticalStackLayout>
+</ContentPage>

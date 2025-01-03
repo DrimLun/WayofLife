@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WayofLife.Pages.JournalPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Journal">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label
+                HorizontalOptions="Center"
+                Text="Journals"
+                VerticalOptions="Center" />
+
+            <Button Clicked="BtnNewJournal" Text="New Journal" />
+            <VerticalStackLayout Padding="10">
+                <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
+                <ListView
+                    x:Name="journalListView"
+                    ItemSelected="journalListView_ItemSelected"
+                    SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--  ViewCell can only contain one "StackLayout"  -->
+                                <StackLayout>
+                                    <StackLayout Padding="10" Orientation="Vertical">
+                                        <Label Text="{Binding DateTime}" />
+                                    </StackLayout>
+
+                                    <StackLayout Padding="30" Orientation="Vertical">
+                                        <Label Text="{Binding Title}" />
+                                    </StackLayout>
+
+                                    <ImageButton
+                                        Clicked="DeleteButton_Clicked"
+                                        HeightRequest="40"
+                                        WidthRequest="40">
+                                        <ImageButton.Source>
+                                            <FontImageSource
+                                                FontFamily="FluentIcons"
+                                                Glyph="&#xE74D;"
+                                                Size="24"
+                                                Color="Red" />
+                                        </ImageButton.Source>
+                                    </ImageButton>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

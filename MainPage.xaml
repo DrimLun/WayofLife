@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WayofLife.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:WayofLife">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+
+            <!--<Label BindingContext="selectedQuote"></Label>-->
+            <!--<Label Text="{Binding selectedQuote}" FontSize="14" />-->
+            <Label
+                x:Name="QuoteLabel"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Entry
+                x:DataType="Entry"
+                MaximumWidthRequest="400"
+                Placeholder="How are you today?"
+                Text="{Binding Text}" />
+
+            <!--<CollectionView
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem BackgroundColor="Red" Text="Delete" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
