@@ -18,7 +18,14 @@ namespace WayofLifev2
                         fonts.AddFont("SegoeFluentIcons.ttf", "FluentIcons");
                 });
 
+
+/* Unmerged change from project 'WayofLifev2 (net9.0-maccatalyst)'
+Before:
             builder.Services.AddSingleton<WayofLife.JournalDatabase>();
+After:
+            builder.Services.AddSingleton<JournalDatabase>();
+*/
+            builder.Services.AddSingleton<WayofLifev2.Database_File.JournalDatabase>();
 
             builder.Services.AddTransient<AddJournal>();
             builder.Services.AddTransient<JournalViewModel>();

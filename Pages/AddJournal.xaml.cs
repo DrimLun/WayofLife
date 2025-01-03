@@ -1,17 +1,33 @@
+using System.Collections.ObjectModel;
 using WayofLife.ViewModel;
+using WayofLifev2.Database_File;
+using WayofLifev2.Models;
+using WayofLifev2.Repositories;
 
 namespace WayofLife.Pages;
 
 public partial class AddJournal : ContentPage
 {
-	public AddJournal(JournalViewModel vm)
+
+    public AddJournal(JournalViewModel vm)
 	{
 		InitializeComponent();
 
 		BindingContext = vm;
-	}
+    }
 
+    private JournalDatabase journalDatabase = new();
+    public ObservableCollection<Category> cCollection = new ObservableCollection<Category>();
 
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        var cCollection = await journalDatabase.GetCategoriesAsync();
+
+        enCategory.ItemsSource = cCollection;
+
+    }
     private async void handleException(Exception ex)
     {
 
@@ -64,15 +80,14 @@ public partial class AddJournal : ContentPage
     }
 
     private async void BtnAddJournal_Clicked(object sender, EventArgs e)
-    { 
-        JournalDatabase journalDatabase = new JournalDatabase();
-
+    {
         string inTitle = enTitle.Text;
         string inWrittenContent = enContent.Text;
+        string inCategory = enCategory.ToString()!;
 
         Journal newJournal = new Journal(inTitle, inWrittenContent);
 
-        await journalDatabase.SaveItemAsync(newJournal);
+        await journalDatabase.SaveJournalAsync(newJournal);
         await Shell.Current.GoToAsync("..");
 
         //jCollection.Add();

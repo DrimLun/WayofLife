@@ -10,7 +10,9 @@ namespace WayofLife
     {
             public const string DatabaseFilename = "JournalSQLite.db3";
 
-            public const SQLite.SQLiteOpenFlags Flags =
+        public const string DatabaseFilenameCategory = "CategorySQLite.db3";
+
+        public const SQLite.SQLiteOpenFlags Flags =
                 // open the database in read/write mode
                 SQLite.SQLiteOpenFlags.ReadWrite |
                 // create the database if it doesn't exist
@@ -18,11 +20,10 @@ namespace WayofLife
                 // enable multi-threaded database access
                 SQLite.SQLiteOpenFlags.SharedCache;
 
-            //public static string DatabasePath =>
-            //    Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
         public static string DatabasePath =>
-            Path.Combine("C:\\Users\\NathanSim\\source\\repos\\WayofLifev2\\Database_File", DatabaseFilename);
+            Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
 
- 
+        public static string DatabasePathCateogry =>
+            Path.Combine(FileSystem.AppDataDirectory, DatabaseFilenameCategory);
     }
 }

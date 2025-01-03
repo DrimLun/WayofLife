@@ -1,6 +1,9 @@
 using System.Collections.ObjectModel;
 using WayofLife.ViewModel;
+using WayofLifev2.Database_File;
+using WayofLifev2.Models;
 using WayofLifev2.Pages;
+using WayofLifev2.Repositories;
 
 namespace WayofLife.Pages;
 
@@ -25,7 +28,6 @@ public partial class JournalPage : ContentPage
         {
             //Has to be observable collection...
             //public ObservableCollection<Journal> jCollection = new ObservableCollection<Journal>();
-            jCollection.Add(new Journal("Another lesson learnt", "wow", "ok.jpg"));
 
             journalListView.ItemsSource = jCollection;
         }
@@ -41,7 +43,7 @@ public partial class JournalPage : ContentPage
         base.OnAppearing();
 
         // Fetch the data
-        var jCollection = await jdatabase.GetItemsAsync();
+        var jCollection = await jdatabase.GetJournalsAsync();
 
         // Bind data to ListView
         journalListView.ItemsSource = jCollection;
@@ -95,11 +97,11 @@ public partial class JournalPage : ContentPage
         if (confirm)
         {
             // Delete from database
-            var item = await jdatabase.GetItemAsync(id);
-            await jdatabase.DeleteItemAsync(item);
+            var item = await jdatabase.GetJournalAsync(id);
+            await jdatabase.DeleteJournalAsync(item);
 
             // Refresh ListView
-            journalListView.ItemsSource = await jdatabase.GetItemsAsync();
+            journalListView.ItemsSource = await jdatabase.GetJournalsAsync();
         }
     }
 

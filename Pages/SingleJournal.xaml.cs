@@ -1,12 +1,13 @@
-using WayofLife;
 using WayofLife.ViewModel;
-using WayofLife.ViewModel;
+using WayofLifev2.Database_File;
+using WayofLifev2.Models;
+using WayofLifev2.Repositories;
 
 namespace WayofLifev2.Pages;
 
 public partial class SingleJournal : ContentPage
 {
-	JournalDatabase jdatabase = new JournalDatabase();
+    private JournalDatabase jdatabase = new ();
 
     static int selectedID = 0;
 	public SingleJournal(JournalViewModel vm, int id)
@@ -24,11 +25,11 @@ public partial class SingleJournal : ContentPage
 
         try
         {
-            Journal selectedJournal = await this.jdatabase.GetItemAsync(selectedID);
+            Journal selectedJournal = await this.jdatabase.GetJournalAsync(selectedID);
 
             if (selectedJournal == null)
             {
-                await DisplayAlert("It's null bro", "It's null bro", "Ok...");
+                await DisplayAlert("Null", "It's null bro", "Ok...");
             }
             else
             {

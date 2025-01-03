@@ -3,16 +3,18 @@
     x:Class="WayofLife.Pages.JournalPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Journal">
+    Title="Journals">
 
     <ScrollView>
         <VerticalStackLayout>
-            <Label
+
+            <Button
+                Clicked="BtnNewJournal"
+                FlexLayout.Order="1"
                 HorizontalOptions="Center"
-                Text="Journals"
+                Text="New Journal"
                 VerticalOptions="Center" />
 
-            <Button Clicked="BtnNewJournal" Text="New Journal" />
             <VerticalStackLayout Padding="10">
                 <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
                 <ListView
