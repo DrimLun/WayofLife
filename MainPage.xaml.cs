@@ -8,8 +8,7 @@
         {
             InitializeComponent();
 
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "journal.db");
-            System.Diagnostics.Debug.WriteLine("Local Database File Path: " + dbPath);
+            System.Diagnostics.Debug.WriteLine("Local Database File Path: " + Constant.DatabasePath);
 
             List<string> quotes =
             [

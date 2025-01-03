@@ -18,6 +18,7 @@ public partial class AddJournal : ContentPage
 
     private JournalDatabase journalDatabase = new();
     public ObservableCollection<Category> cCollection = new ObservableCollection<Category>();
+    public List<string> cNameList = new List<string>();
 
     protected async override void OnAppearing()
     {
@@ -25,7 +26,12 @@ public partial class AddJournal : ContentPage
 
         var cCollection = await journalDatabase.GetCategoriesAsync();
 
-        enCategory.ItemsSource = cCollection;
+        foreach (Category category in cCollection)
+        {
+            cNameList.Add(category.Name);
+        }
+
+        enCategory.ItemsSource = cNameList;
 
     }
     private async void handleException(Exception ex)
@@ -85,11 +91,9 @@ public partial class AddJournal : ContentPage
         string inWrittenContent = enContent.Text;
         string inCategory = enCategory.ToString()!;
 
-        Journal newJournal = new Journal(inTitle, inWrittenContent);
+        Journal newJournal = new Journal(inTitle, inCategory, inWrittenContent);
 
         await journalDatabase.SaveJournalAsync(newJournal);
         await Shell.Current.GoToAsync("..");
-
-        //jCollection.Add();
     }
 }

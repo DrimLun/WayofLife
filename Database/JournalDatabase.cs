@@ -19,9 +19,8 @@ namespace WayofLifev2.Database_File
         {
             if (Database != null)
             {
-                // Create the table only if it doesn't exist
                 var journalTableInfo = await Database.GetTableInfoAsync("Journal");
-                if (journalTableInfo.Count == 0)
+                if (journalTableInfo.Count == 0) // Create the table only if it doesn't exist
                 {
                     await Database.CreateTableAsync<Journal>();
                 }
@@ -81,7 +80,7 @@ namespace WayofLifev2.Database_File
             return await Database.Table<Category>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<int> SaveCategoryAsync(Journal item)
+        public async Task<int> SaveCategoryAsync(Category item)
         {
             await InitAsync();
             if (item.Id != 0)
@@ -90,7 +89,7 @@ namespace WayofLifev2.Database_File
                 return await Database.InsertAsync(item);
         }
 
-        public async Task<int> DeleteCategoryAsync(Journal item)
+        public async Task<int> DeleteCategoryAsync(Category item)
         {
             await InitAsync();
             return await Database.DeleteAsync(item);

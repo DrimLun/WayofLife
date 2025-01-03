@@ -12,11 +12,19 @@ namespace WayofLifev2.Models
         public string? WrittenContent { get; set; }
         public string? ImageContentPath { get; set; }
         private DateTime dateTime;
-        public bool Done { get; set; }
+        //public bool Done { get; set; }
 
         public Journal(string inTitle, string inWrittenContent)
         {
             Title = inTitle;
+            WrittenContent = inWrittenContent;
+            DateTime = DateTime.Now;
+        }
+
+        public Journal(string inTitle, string inCategory, string inWrittenContent)
+        {
+            Title = inTitle;
+            Category = inCategory;
             WrittenContent = inWrittenContent;
             DateTime = DateTime.Now;
         }
@@ -28,7 +36,6 @@ namespace WayofLifev2.Models
             WrittenContent = inWrittenContent;
             ImageContentPath = inImageContentPath;
             DateTime = DateTime.Now;
-
         }
         public Journal() 
         {
