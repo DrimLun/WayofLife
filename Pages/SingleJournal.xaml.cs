@@ -34,6 +34,7 @@ public partial class SingleJournal : ContentPage
             else
             {
                 lblTitle.Text = selectedJournal!.Title;
+                lblCategory.Text = selectedJournal!.Category;
                 lblContent.Text = selectedJournal!.WrittenContent;
                 lblDateTime.Text = selectedJournal!.DateTime.ToString();
             }

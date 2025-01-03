@@ -89,7 +89,7 @@ public partial class AddJournal : ContentPage
     {
         string inTitle = enTitle.Text;
         string inWrittenContent = enContent.Text;
-        string inCategory = enCategory.ToString()!;
+        string inCategory = enCategory.SelectedItem.ToString()!;
 
         Journal newJournal = new Journal(inTitle, inCategory, inWrittenContent);
 

@@ -15,11 +15,11 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
 
-            <Entry
+            <!--<Entry
                 x:DataType="Entry"
                 MaximumWidthRequest="400"
                 Placeholder="How are you today?"
-                Text="{Binding Text}" />
+                Text="{Binding Text}" />-->
 
             <!--<CollectionView
                 Grid.Row="2"

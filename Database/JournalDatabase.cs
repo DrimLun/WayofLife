@@ -56,7 +56,7 @@ namespace WayofLifev2.Database_File
         public async Task<int> SaveJournalAsync(Journal item)
         {
             await InitAsync();
-            if (item.Id != 0)
+            if (item.Id != 0) //Journal's id is 0 when created, later assigned by SQLite
                 return await Database.UpdateAsync(item);
             else
                 return await Database.InsertAsync(item);

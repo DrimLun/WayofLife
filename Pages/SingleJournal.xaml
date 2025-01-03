@@ -10,6 +10,7 @@
             <Label x:Name="lblTitle" Text="" />
         </StackLayout>
 
+        <Label x:Name="lblCategory" />
 
         <Label x:Name="lblDateTime" Text="" />
 
