@@ -22,6 +22,11 @@
         ContentTemplate="{DataTemplate local:Pages.JournalPage}"
         Route="JournalPage" />
 
+    <ShellContent
+        Title="Expiry Reminder"
+        ContentTemplate="{DataTemplate local:Pages.ExpiryPage}"
+        Route="ExpiryPage" />
+
     <!--<ShellContent
         Title="AddJournal"
         ContentTemplate="{DataTemplate local:Pages.AddJournal}"

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WayofLife.Pages.ExpiryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Expiry Reminder">
+
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <Button
+                Clicked="BtnNewExpiry"
+                HorizontalOptions="Center"
+                Text="New Item"
+                VerticalOptions="Center" />
+
+            <Grid ColumnDefinitions="*, 200" RowDefinitions="Auto, Auto">
+                <VerticalStackLayout Padding="10">
+                    <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
+                    <ListView
+                        x:Name="expiryListView"
+                        ItemSelected="expiryListView_ItemSelected"
+                        SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <!--  ViewCell can only contain one "StackLayout"  -->
+                                    <StackLayout>
+
+                                        <StackLayout Padding="30" Orientation="Vertical">
+                                            <Label Text="{Binding Name}" />
+                                        </StackLayout>
+
+                                        <StackLayout Padding="10" Orientation="Vertical">
+                                            <Label Text="{Binding Category}" />
+                                        </StackLayout>
+
+                                        <StackLayout Padding="10" Orientation="Vertical">
+                                            <Label Text="{Binding DateTime}" />
+                                        </StackLayout>
+
+                                        <ImageButton
+                                            Clicked="DeleteButton_Clicked"
+                                            HeightRequest="40"
+                                            WidthRequest="40">
+                                            <ImageButton.Source>
+                                                <FontImageSource
+                                                    FontFamily="FluentIcons"
+                                                    Glyph="&#xE74D;"
+                                                    Size="24"
+                                                    Color="Red" />
+                                            </ImageButton.Source>
+                                        </ImageButton>
+
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </VerticalStackLayout>
+                <StackLayout Grid.Column="1" Padding="10">
+                    <Entry x:Name="enName" />
+                    <DatePicker x:Name="pickDate" />
+                    <Picker x:Name="pickCategory" />
+                </StackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

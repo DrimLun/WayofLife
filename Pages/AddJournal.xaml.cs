@@ -34,27 +34,6 @@ public partial class AddJournal : ContentPage
         enCategory.ItemsSource = cNameList;
 
     }
-    private async void handleException(Exception ex)
-    {
-
-        string msg = ex.Message.ToString();
-        string caption = "Error";
-
-        try
-        {
-            //https://stackoverflow.com/questions/21307789/how-to-save-exception-in-txt-file
-            //new MessageWriteToFile(ex).WriteToFile();
-        }
-        catch (Exception exInEx)
-        {
-            await DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.Message.ToString(), "Ok");
-        }
-        finally
-        {
-            await DisplayAlert(caption, "Error Occured! See Details Below:\n\n" + msg, "Ok");
-        }
-
-    }
 
     private async void BtnAddImages_Clicked(object sender, EventArgs e)
     {
@@ -87,13 +66,44 @@ public partial class AddJournal : ContentPage
 
     private async void BtnAddJournal_Clicked(object sender, EventArgs e)
     {
-        string inTitle = enTitle.Text;
-        string inWrittenContent = enContent.Text;
-        string inCategory = enCategory.SelectedItem.ToString()!;
+        if (enContent.Text == null)
+        {
+            await DisplayAlert("Error", "Please write something", "Ok");
+            return;
+        }
+        else
+        {
+            string inTitle = enTitle.Text;
+            string inWrittenContent = enContent.Text;
+            string inCategory = enCategory.SelectedItem.ToString()!;
+            string inImageContentPath = "";
 
-        Journal newJournal = new Journal(inTitle, inCategory, inWrittenContent);
+            Journal newJournal = new Journal(inTitle, inCategory, inWrittenContent, inImageContentPath);
 
-        await journalDatabase.SaveJournalAsync(newJournal);
-        await Shell.Current.GoToAsync("..");
+            await journalDatabase.SaveJournalAsync(newJournal);
+            await Shell.Current.GoToAsync("..");
+        }
+    }
+
+    private async void handleException(Exception ex)
+    {
+
+        string msg = ex.Message.ToString();
+        string caption = "Error";
+
+        try
+        {
+            //https://stackoverflow.com/questions/21307789/how-to-save-exception-in-txt-file
+            //new MessageWriteToFile(ex).WriteToFile();
+        }
+        catch (Exception exInEx)
+        {
+            await DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.Message.ToString(), "Ok");
+        }
+        finally
+        {
+            await DisplayAlert(caption, "Error Occured! See Details Below:\n\n" + msg, "Ok");
+        }
+
     }
 }

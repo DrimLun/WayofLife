@@ -14,21 +14,6 @@ namespace WayofLifev2.Models
         private DateTime dateTime;
         //public bool Done { get; set; }
 
-        public Journal(string inTitle, string inWrittenContent)
-        {
-            Title = inTitle;
-            WrittenContent = inWrittenContent;
-            DateTime = DateTime.Now;
-        }
-
-        public Journal(string inTitle, string inCategory, string inWrittenContent)
-        {
-            Title = inTitle;
-            Category = inCategory;
-            WrittenContent = inWrittenContent;
-            DateTime = DateTime.Now;
-        }
-
         public Journal(string inTitle, string inCategory, string inWrittenContent, string inImageContentPath)
         {
             Title = inTitle;
@@ -40,7 +25,6 @@ namespace WayofLifev2.Models
         public Journal() 
         {
             Title = "Default Title";
-            Category = "";
             WrittenContent = "";
             ImageContentPath = "";
             DateTime = DateTime.Now;

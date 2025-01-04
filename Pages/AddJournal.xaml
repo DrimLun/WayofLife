@@ -14,9 +14,10 @@
             <VerticalStackLayout>
                 <Entry x:Name="enTitle" Placeholder="Title" />
 
+                <Label Text="Category" />
                 <Picker x:Name="enCategory" />
 
-                <Entry x:Name="enContent" Placeholder="Content" />
+                <Entry x:Name="enContent" Placeholder="" />
 
                 <Button
                     x:Name="BtnAddImages"

@@ -53,5 +53,11 @@ namespace WayofLifev2.Database
             else
                 return await Database.InsertAsync(item);
         }
+
+        public async Task<int> DeleteExpiryAsync(Expiry item)
+        {
+            await InitAsync();
+            return await Database.DeleteAsync(item);
+        }
     }
 }
