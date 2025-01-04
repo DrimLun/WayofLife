@@ -24,7 +24,7 @@ public partial class AddJournal : ContentPage
     {
         base.OnAppearing();
 
-        var cCollection = await journalDatabase.GetCategoriesAsync();
+         var cCollection = await journalDatabase.GetCategoriesAsync();
 
         foreach (Category category in cCollection)
         {
@@ -98,7 +98,7 @@ public partial class AddJournal : ContentPage
         }
         catch (Exception exInEx)
         {
-            await DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.Message.ToString(), "Ok");
+            await DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.ToString(), "Ok");
         }
         finally
         {

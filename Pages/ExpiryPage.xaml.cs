@@ -1,54 +1,39 @@
 using System.Collections.ObjectModel;
-using WayofLife.ViewModel;
 using WayofLifev2.Database;
-using WayofLifev2.Database_File;
 using WayofLifev2.Models;
-using WayofLifev2.Pages;
 
 namespace WayofLife.Pages;
 
 public partial class ExpiryPage : ContentPage
 {
 
-    ExpiryDatabase jdatabase = new ();
+    ExpiryDatabase eDatabase = new ();
     public ExpiryPage()
 	{
         InitializeComponent();
-
-        //this.RefreshData();
     }
 
     public ObservableCollection<Journal> eCollection = new(); //Has to be observable collection
 
-    private void RefreshData()
+    protected override async void OnAppearing()
     {
-
         try
         {
-            //Has to be observable collection...
-            //public ObservableCollection<Journal> eCollection = new ObservableCollection<Journal>();
+            base.OnAppearing();
 
+            // Fetch the data
+            var eCollection = await eDatabase.GetExpiriesAsync();
+
+            // Bind data to ListView
             expiryListView.ItemsSource = eCollection;
         }
         catch (Exception ex)
         {
-            //catch exception then pass it
-            handleException(ex);
+            HandleException(ex);
         }
     }
 
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-
-        // Fetch the data
-        var eCollection = await jdatabase.GetExpiriesAsync();
-
-        // Bind data to ListView
-        expiryListView.ItemsSource = eCollection;
-    }
-
-    private async void handleException(Exception ex)
+    private void HandleException(Exception ex)
     {
 
         string msg = ex.Message.ToString();
@@ -61,61 +46,65 @@ public partial class ExpiryPage : ContentPage
         }
         catch (Exception exInEx)
         {
-            await DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.Message.ToString(), "Ok");
+            _ = DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.ToString(), "Ok");
         }
         finally
         {
-            await DisplayAlert(caption, "Error Occured! See Details Below:\n\n" + msg, "Ok");
+            _ = DisplayAlert(caption, "Error Occured! See Details Below:\n\n" + msg, "Ok");
         }
 
     }
 
-    //https://devblogs.microsoft.com/dotnet/announcing-dotnet-maui-preview-11/
-
-    //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/button?view=net-maui-9.0
     private async void BtnNewExpiry(object sender, EventArgs e)
     {
         try
         {
-            var expiryViewModel = new JournalViewModel(); // Create or reuse an instance
+            Expiry NewExpiry = new(enName.Text, pickDate.Date);
+            //NewExpiry.Category = pickCategory.SelectedItem.ToString();
 
-            await Navigation.PushAsync(page: new AddJournal(expiryViewModel));
+            await eDatabase.SaveExpiryAsync(NewExpiry);
         }
         catch (Exception ex)
         {
-            handleException(ex);
+            HandleException(ex);
         }
     }
 
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        var button = (ImageButton)sender; // Get the clicked button
-        int id = (int)button.CommandParameter; // Get the ID of the item
-
-        bool confirm = await DisplayAlert("Delete", "Are you sure you want to delete this?", "Yes", "No");
-        if (confirm)
+        try
         {
-            // Delete from database
-            var item = await jdatabase.GetExpiryAsync(id);
-            await jdatabase.DeleteExpiryAsync(item);
-
-            // Refresh ListView
-            expiryListView.ItemsSource = await jdatabase.GetExpiriesAsync();
+            var button = (Button)sender; // Get the clicked button
+            int id = (int)button.CommandParameter; // Get the ID of the item
+            bool confirm = await DisplayAlert("Delete", "Are you sure you want to delete this?", "Yes", "No");
+            if (confirm)
+            {
+                // Delete from database
+                var item = await eDatabase.GetExpiryAsync(id);
+                await eDatabase.DeleteExpiryAsync(item);
+                // Refresh ListView
+                expiryListView.ItemsSource = await eDatabase.GetExpiriesAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            HandleException(ex);
         }
     }
 
-    private async void expiryListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void expiryListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         try
         {
             Expiry selectedExpiry = (Expiry)e.SelectedItem;
 
-            enName.Text = selectedExpiry.Name;
-            pickDate.Date = selectedExpiry.ExpiryDateTime;
+            enName.Text                 = selectedExpiry.Name;
+            pickDate.Date               = selectedExpiry.ExpiryDateTime;
+            pickCategory.SelectedItem   = selectedExpiry.Category;
         }
         catch (Exception ex)
         {
-            handleException(ex);
+            HandleException(ex);
         }
     }
 }

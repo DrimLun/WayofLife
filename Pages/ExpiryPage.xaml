@@ -8,13 +8,7 @@
     <ScrollView>
         <VerticalStackLayout>
 
-            <Button
-                Clicked="BtnNewExpiry"
-                HorizontalOptions="Center"
-                Text="New Item"
-                VerticalOptions="Center" />
-
-            <Grid ColumnDefinitions="*, 200" RowDefinitions="Auto, Auto">
+            <Grid ColumnDefinitions="*, 400" RowDefinitions="Auto, Auto">
                 <VerticalStackLayout Padding="10">
                     <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
                     <ListView
@@ -36,7 +30,7 @@
                                         </StackLayout>
 
                                         <StackLayout Padding="10" Orientation="Vertical">
-                                            <Label Text="{Binding DateTime}" />
+                                            <Label Text="{Binding ExpiryDateTime}" />
                                         </StackLayout>
 
                                         <ImageButton
@@ -60,9 +54,17 @@
 
                 </VerticalStackLayout>
                 <StackLayout Grid.Column="1" Padding="10">
-                    <Entry x:Name="enName" />
+                    <Entry x:Name="enName" Placeholder="Name" />
+                    <Label Text="Expiry Date" />
                     <DatePicker x:Name="pickDate" />
+                    <Label Text="Category" />
                     <Picker x:Name="pickCategory" />
+
+                    <Button
+                        Clicked="BtnNewExpiry"
+                        HorizontalOptions="Center"
+                        Text="New Item"
+                        VerticalOptions="Center" />
                 </StackLayout>
             </Grid>
         </VerticalStackLayout>

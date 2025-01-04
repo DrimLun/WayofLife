@@ -14,9 +14,6 @@ public partial class JournalPage : ContentPage
     public JournalPage()
 	{
         InitializeComponent();
-
-        //this.RefreshData();
-        ////Has to be observable collection
     }
 
     public ObservableCollection<Journal> jCollection = new ObservableCollection<Journal>();
@@ -40,13 +37,20 @@ public partial class JournalPage : ContentPage
 
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
+        try
+        {
+            base.OnAppearing();
 
-        // Fetch the data
-        var jCollection = await jdatabase.GetJournalsAsync();
+                    // Fetch the data
+                    var jCollection = await jdatabase.GetJournalsAsync();
 
-        // Bind data to ListView
-        journalListView.ItemsSource = jCollection;
+                    // Bind data to ListView
+                    journalListView.ItemsSource = jCollection;
+        }
+        catch (Exception ex)
+        {
+            handleException(ex);
+        }
     }
 
     private async void handleException(Exception ex)
@@ -90,18 +94,25 @@ public partial class JournalPage : ContentPage
 
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        var button = (ImageButton)sender; // Get the clicked button
-        int id = (int)button.CommandParameter; // Get the ID of the item
-
-        bool confirm = await DisplayAlert("Delete", "Are you sure you want to delete this?", "Yes", "No");
-        if (confirm)
+        try
         {
-            // Delete from database
-            var item = await jdatabase.GetJournalAsync(id);
-            await jdatabase.DeleteJournalAsync(item);
+            var button = (ImageButton)sender; // Get the clicked button
+            int id = (int)button.CommandParameter; // Get the ID of the item
 
-            // Refresh ListView
-            journalListView.ItemsSource = await jdatabase.GetJournalsAsync();
+            bool confirm = await DisplayAlert("Delete", "Are you sure you want to delete this?", "Yes", "No");
+            if (confirm)
+            {
+                // Delete from database
+                var item = await jdatabase.GetJournalAsync(id);
+                await jdatabase.DeleteJournalAsync(item);
+
+                // Refresh ListView
+                journalListView.ItemsSource = await jdatabase.GetJournalsAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            handleException(ex);
         }
     }
 

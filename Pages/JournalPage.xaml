@@ -40,6 +40,7 @@
 
                                     <ImageButton
                                         Clicked="DeleteButton_Clicked"
+                                        CommandParameter="{Binding Id}"
                                         HeightRequest="40"
                                         WidthRequest="40">
                                         <ImageButton.Source>
