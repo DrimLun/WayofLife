@@ -17,9 +17,10 @@ namespace WayofLifev2.Models
 
         public string? Icon { get; set; }
 
-        public Category(string inCatName)
+        public Category(string inCatName, string inColor)
         {
             Name = inCatName;
+            Color = inColor;
         }
 
         public Category()

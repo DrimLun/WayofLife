@@ -26,7 +26,7 @@
             //string selectedQuote = quotes[0];
 
             //Console.WriteLine(selectedQuote);
-            //System.Diagnostics.Debug.WriteLine(selectedQuote);
+            System.Diagnostics.Debug.WriteLine(selectedQuote);
 
             QuoteLabel.Text = selectedQuote;
         }

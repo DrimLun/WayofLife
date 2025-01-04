@@ -29,10 +29,10 @@ namespace WayofLifev2.Database_File
                 if (categoryTableInfo.Count == 0)
                 {
                     await Database.CreateTableAsync<Category>();
-                    await Database.InsertAsync(new Category("Gratitude"));
-                    await Database.InsertAsync(new Category("Reflection"));
-                    await Database.InsertAsync(new Category("Knowledge"));
-                    await Database.InsertAsync(new Category("Health"));
+                    await Database.InsertAsync(new Category("Gratitude", "Green"));
+                    await Database.InsertAsync(new Category("Reflection", "Cadet Blue"));
+                    await Database.InsertAsync(new Category("Knowledge", "Orange"));
+                    await Database.InsertAsync(new Category("Health", "Cyan"));
                 }
             }
             else

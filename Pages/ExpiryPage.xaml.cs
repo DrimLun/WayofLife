@@ -13,7 +13,7 @@ public partial class ExpiryPage : ContentPage
         InitializeComponent();
     }
 
-    public ObservableCollection<Journal> eCollection = new(); //Has to be observable collection
+    List<string> cList = new();
 
     protected override async void OnAppearing()
     {
@@ -23,9 +23,16 @@ public partial class ExpiryPage : ContentPage
 
             // Fetch the data
             var eCollection = await eDatabase.GetExpiriesAsync();
+            var cCollection = await eDatabase.GetCategoriesAsync();
 
             // Bind data to ListView
             expiryListView.ItemsSource = eCollection;
+
+            foreach (var category in cCollection)
+            {
+                cList.Add(category.Name);
+            }
+            pickCategory.ItemsSource   = cList;
         }
         catch (Exception ex)
         {
@@ -60,9 +67,10 @@ public partial class ExpiryPage : ContentPage
         try
         {
             Expiry NewExpiry = new(enName.Text, pickDate.Date);
-            //NewExpiry.Category = pickCategory.SelectedItem.ToString();
+            NewExpiry.Category = pickCategory.SelectedItem.ToString();
 
             await eDatabase.SaveExpiryAsync(NewExpiry);
+            await Shell.Current.GoToAsync(".");
         }
         catch (Exception ex)
         {
@@ -74,7 +82,7 @@ public partial class ExpiryPage : ContentPage
     {
         try
         {
-            var button = (Button)sender; // Get the clicked button
+            var button = (ImageButton)sender; // Get the clicked button
             int id = (int)button.CommandParameter; // Get the ID of the item
             bool confirm = await DisplayAlert("Delete", "Are you sure you want to delete this?", "Yes", "No");
             if (confirm)
