@@ -3,6 +3,7 @@
     x:Class="WayofLife.Pages.ExpiryPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="expiryPage"
     Title="Expiry Reminder">
 
     <ScrollView>
@@ -34,7 +35,7 @@
                                         </StackLayout>
 
                                         <ImageButton
-                                            Clicked="DeleteButton_Clicked"
+                                            Command="{Binding Source={x:Reference expiryPage}, Path=DeleteCommand}"
                                             CommandParameter="{Binding Id}"
                                             HeightRequest="40"
                                             WidthRequest="40">
@@ -61,8 +62,9 @@
                     <Label Text="Category" />
                     <Picker x:Name="pickCategory" />
 
+                    <!--  You see, expiryPage doesn't need semicolons here too. It's a XAML file.  -->
                     <Button
-                        Clicked="BtnNewExpiry"
+                        Command="{Binding Source={x:Reference expiryPage}, Path=NewExpiryCommand}"
                         HorizontalOptions="Center"
                         Text="New Item"
                         VerticalOptions="Center" />

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using MvvmHelpers.Commands;
 using WayofLifev2.Database;
 using WayofLifev2.Models;
 
@@ -8,14 +8,39 @@ public partial class ExpiryPage : ContentPage
 {
 
     ExpiryDatabase eDatabase = new ();
+    public required AsyncCommand<int> DeleteCommand { get; init; }
+    public required AsyncCommand<int> NewExpiryCommand { get; init; }
     public ExpiryPage()
 	{
-        InitializeComponent();
+        try
+        {
+            InitializeComponent();
+            DeleteCommand = new AsyncCommand<int>(async (id) => await DeleteButton_ClickedAsync(id));
+            NewExpiryCommand = new AsyncCommand<int>(async(id) => await BtnNewExpiryAsync());
+        }
+        catch (Exception ex)
+        {
+            HandleException(ex);
+        }
     }
 
-    List<string> cList = new();
+    private List<string> cList = [];
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
+    {
+        try
+        {
+            base.OnAppearing();
+
+            _ = RefreshDataAsync();
+        }
+        catch (Exception ex)
+        {
+            HandleException(ex);
+        }
+    }
+
+    private async Task RefreshDataAsync()
     {
         try
         {
@@ -28,18 +53,21 @@ public partial class ExpiryPage : ContentPage
             // Bind data to ListView
             expiryListView.ItemsSource = eCollection;
 
+
             foreach (var category in cCollection)
             {
-                cList.Add(category.Name);
+                if (category.Name != null)
+                    cList.Add(category.Name);
+                else
+                    cList.Add("No Category");
             }
-            pickCategory.ItemsSource   = cList;
+            pickCategory.ItemsSource = cList;
         }
         catch (Exception ex)
         {
             HandleException(ex);
         }
     }
-
     private void HandleException(Exception ex)
     {
 
@@ -62,12 +90,20 @@ public partial class ExpiryPage : ContentPage
 
     }
 
-    private async void BtnNewExpiry(object sender, EventArgs e)
+    private async Task BtnNewExpiryAsync()
     {
         try
         {
             Expiry NewExpiry = new(enName.Text, pickDate.Date);
-            NewExpiry.Category = pickCategory.SelectedItem.ToString();
+
+            if (pickCategory.SelectedItem == null)
+            {
+                NewExpiry.Category = "No Category";
+            }
+            else
+            {
+                NewExpiry.Category = pickCategory.SelectedItem.ToString();
+            }
 
             await eDatabase.SaveExpiryAsync(NewExpiry);
             await Shell.Current.GoToAsync(".");
@@ -78,18 +114,24 @@ public partial class ExpiryPage : ContentPage
         }
     }
 
-    private async void DeleteButton_Clicked(object sender, EventArgs e)
+
+    private async Task DeleteButton_ClickedAsync(int id)
     {
         try
         {
-            var button = (ImageButton)sender; // Get the clicked button
-            int id = (int)button.CommandParameter; // Get the ID of the item
             bool confirm = await DisplayAlert("Delete", "Are you sure you want to delete this?", "Yes", "No");
             if (confirm)
             {
                 // Delete from database
                 var item = await eDatabase.GetExpiryAsync(id);
-                await eDatabase.DeleteExpiryAsync(item);
+                if (item != null)
+                {
+                    await eDatabase.DeleteExpiryAsync(item);
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Item not found", "Ok");
+                }
                 // Refresh ListView
                 expiryListView.ItemsSource = await eDatabase.GetExpiriesAsync();
             }

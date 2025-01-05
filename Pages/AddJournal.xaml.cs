@@ -17,22 +17,28 @@ public partial class AddJournal : ContentPage
     }
 
     private JournalDatabase journalDatabase = new();
-    public ObservableCollection<Category> cCollection = new ObservableCollection<Category>();
-    public List<string> cNameList = new List<string>();
+    public ObservableCollection<Category> cCollection = [];
+    public List<string> cNameList = [];
 
-    protected async override void OnAppearing()
+    protected override void OnAppearing()
     {
         base.OnAppearing();
 
-         var cCollection = await journalDatabase.GetCategoriesAsync();
+        _= RefreshDataAsync();
+    }
+
+    private async Task RefreshDataAsync()
+    {
+        var cCollection = await journalDatabase.GetCategoriesAsync();
 
         foreach (Category category in cCollection)
         {
-            cNameList.Add(category.Name);
+            if (category.Name != null)
+                cNameList.Add(category.Name);
+            else
+                cNameList.Add("No Category");
         }
-
         enCategory.ItemsSource = cNameList;
-
     }
 
     private async void BtnAddImages_Clicked(object sender, EventArgs e)
@@ -60,7 +66,7 @@ public partial class AddJournal : ContentPage
         }
         catch (Exception ex)
         {
-            handleException(ex);
+            await handleExceptionAsync(ex);
         }
     }
 
@@ -85,7 +91,7 @@ public partial class AddJournal : ContentPage
         }
     }
 
-    private async void handleException(Exception ex)
+    private async Task handleExceptionAsync(Exception ex)
     {
 
         string msg = ex.Message.ToString();

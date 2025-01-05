@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XML1lzamLOM=",
+  "dgSpecHash": "HtMIBT5Qhpo=",
   "success": true,
   "projectFilePath": "C:\\Users\\NathanSim\\source\\repos\\WayofLifev2\\WayofLifev2.csproj",
   "expectedPackageFiles": [
@@ -65,6 +65,7 @@
     "C:\\Users\\NathanSim\\.nuget\\packages\\microsoft.windowsappsdk\\1.6.241114003\\microsoft.windowsappsdk.1.6.241114003.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\nerdbank.streams\\2.11.79\\nerdbank.streams.2.11.79.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\NathanSim\\.nuget\\packages\\refractored.mvvmhelpers\\1.6.2\\refractored.mvvmhelpers.1.6.2.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\runtime.any.system.diagnostics.tracing\\4.3.0\\runtime.any.system.diagnostics.tracing.4.3.0.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\runtime.any.system.runtime\\4.3.0\\runtime.any.system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
@@ -111,6 +112,7 @@
     "C:\\Users\\NathanSim\\.nuget\\packages\\system.text.json\\9.0.0\\system.text.json.9.0.0.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\system.threading.accesscontrol\\8.0.0\\system.threading.accesscontrol.8.0.0.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\system.threading.tasks.dataflow\\8.0.0\\system.threading.tasks.dataflow.8.0.0.nupkg.sha512",
+    "C:\\Users\\NathanSim\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\xamarin.android.glide\\4.16.0.6\\xamarin.android.glide.4.16.0.6.nupkg.sha512",
     "C:\\Users\\NathanSim\\.nuget\\packages\\xamarin.android.glide.annotations\\4.16.0.6\\xamarin.android.glide.annotations.4.16.0.6.nupkg.sha512",

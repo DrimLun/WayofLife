@@ -109,6 +109,10 @@
               "target": "Package",
               "version": "[17.12.40391, )"
             },
+            "Refractored.MvvmHelpers": {
+              "target": "Package",
+              "version": "[1.6.2, )"
+            },
             "System.Private.Uri": {
               "target": "Package",
               "version": "[4.3.2, )"
@@ -183,6 +187,10 @@
             "Microsoft.VisualStudio.Utilities": {
               "target": "Package",
               "version": "[17.12.40391, )"
+            },
+            "Refractored.MvvmHelpers": {
+              "target": "Package",
+              "version": "[1.6.2, )"
             },
             "System.Private.Uri": {
               "target": "Package",
@@ -259,6 +267,10 @@
               "target": "Package",
               "version": "[17.12.40391, )"
             },
+            "Refractored.MvvmHelpers": {
+              "target": "Package",
+              "version": "[1.6.2, )"
+            },
             "System.Private.Uri": {
               "target": "Package",
               "version": "[4.3.2, )"
@@ -328,6 +340,10 @@
             "Microsoft.VisualStudio.Utilities": {
               "target": "Package",
               "version": "[17.12.40391, )"
+            },
+            "Refractored.MvvmHelpers": {
+              "target": "Package",
+              "version": "[1.6.2, )"
             },
             "System.Private.Uri": {
               "target": "Package",

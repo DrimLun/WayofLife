@@ -60,6 +60,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include="WayofLifev2 - Copy.csproj" />
+	  <None Include="WayofLifev2 - Copy.csproj.user" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="MessagePack" Version="3.1.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
@@ -69,6 +74,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.21" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Utilities" Version="17.12.40391" />
+		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
 	</ItemGroup>
