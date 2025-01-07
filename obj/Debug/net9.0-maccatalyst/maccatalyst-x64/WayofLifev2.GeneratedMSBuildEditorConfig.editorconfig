@@ -47,6 +47,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = WayofLifev2.Pages.AddJourn
 build_metadata.AdditionalFiles.TargetPath = Pages\AddJournal.xaml
 build_metadata.AdditionalFiles.RelativePath = Pages\AddJournal.xaml
 
+[C:/Users/NathanSim/source/repos/WayofLifev2/Pages/AddJournalPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = WayofLifev2.Pages.AddJournalPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\AddJournalPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\AddJournalPage.xaml
+
 [C:/Users/NathanSim/source/repos/WayofLifev2/Pages/ExpiryPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = WayofLifev2.Pages.ExpiryPage.xaml

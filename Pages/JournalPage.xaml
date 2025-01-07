@@ -22,6 +22,7 @@
                     ItemSelected="journalListView_ItemSelected"
                     SelectionMode="Single">
                     <ListView.ItemTemplate>
+                        <!--  https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/compiled-bindings?view=net-maui-9.0  -->
                         <DataTemplate>
                             <ViewCell>
                                 <!--  ViewCell can only contain one "StackLayout"  -->

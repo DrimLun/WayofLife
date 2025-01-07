@@ -1,0 +1,79 @@
+﻿In **XAML**, the **`Path`** property **does not require `{Binding ...}` syntax** because it is **already inside a `Binding` context** when used in specific properties like:
+
+```xml
+<Text="{Binding Path=Title}" />
+```
+
+### **1. `Path` in `Binding`: Implicit Context**
+When you use **`{Binding ...}`**, the **`Path`** is **implicitly the default property**. So these two examples are equivalent:
+
+**Explicit Path:**
+```xml
+<Text="{Binding Path=Title}" />
+```
+
+**Simplified:**
+```xml
+<Text="{Binding Title}" />
+```
+
+The `Path` is implied, so you can skip it. Both work the same way.
+
+---
+
+### **2. Outside `{Binding}`—`Path` Needs Context**
+If `Path` is **outside** a `{Binding}` (e.g., in `MultiBinding` or `TemplateBinding`), it won't work without explicitly declaring the **`Binding`**.
+
+**Invalid Example:**
+```xml
+<Text="{Path=Title}" /> <!-- ERROR -->
+```
+
+**Correct Example:**
+```xml
+<Text="{Binding Path=Title}" />
+```
+
+---
+
+### **3. When `Path` is Used Explicitly**
+**Example with `Source`:**
+```xml
+<Text="{Binding Source={x:Reference expiryPage}, Path=DeleteCommand}" />
+```
+
+Here, you must declare the **`Path`** explicitly because:
+- **`Source`** overrides the `BindingContext`.
+- `Path` specifies the property inside the provided `Source`.
+
+---
+
+### **4. Special Cases:**
+1. **Default Binding Behavior:**
+   ```xml
+   <Label Text="{Binding}" />
+   ```
+   - Binds directly to the **entire object** instead of a specific property.  
+
+2. **`Path` Outside Binding:**
+   Used in **`RelativeSource`** or **`StaticResource`**:
+   ```xml
+   <Label Text="{Binding Source={StaticResource MyResource}, Path=SomeProperty}" />
+   ```
+
+3. **MultiBinding:**
+   ```xml
+   <MultiBinding>
+       <Binding Path="Property1" />
+       <Binding Path="Property2" />
+   </MultiBinding>
+   ```
+
+---
+
+### **Summary:**
+- **`{Binding Title}`** is shorthand for **`{Binding Path=Title}`**.  
+- **`Path`** is required only when **additional context** (like `Source`) is specified.  
+- Use **curly braces** (`{}`) only when defining a **markup extension** like `{Binding ...}`.  
+
+Let me know if you need more examples!

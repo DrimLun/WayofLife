@@ -10,6 +10,11 @@
 
             System.Diagnostics.Debug.WriteLine("Local Database File Path: " + Constant.DatabasePath);
 
+            RefreshQuote();
+        }
+
+        public void RefreshQuote()
+        {
             List<string> quotes =
             [
                 "\"All you have to do...is look within\" -- John Greetings (Interface)",
@@ -29,6 +34,11 @@
             System.Diagnostics.Debug.WriteLine(selectedQuote);
 
             QuoteLabel.Text = selectedQuote;
+        }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            RefreshQuote();
         }
     }
 
