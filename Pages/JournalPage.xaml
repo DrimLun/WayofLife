@@ -43,15 +43,8 @@
                                         Clicked="DeleteButton_Clicked"
                                         CommandParameter="{Binding Id}"
                                         HeightRequest="40"
-                                        WidthRequest="40">
-                                        <ImageButton.Source>
-                                            <FontImageSource
-                                                FontFamily="FluentIcons"
-                                                Glyph="&#xE74D;"
-                                                Size="24"
-                                                Color="Red" />
-                                        </ImageButton.Source>
-                                    </ImageButton>
+                                        Source="delete_button.png"
+                                        WidthRequest="40" />
 
                                 </StackLayout>
                             </ViewCell>

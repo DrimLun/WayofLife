@@ -1,4 +1,5 @@
 using MvvmHelpers.Commands;
+using System.Collections.ObjectModel;
 using WayofLifev2.Database;
 using WayofLifev2.Models;
 
@@ -8,6 +9,9 @@ public partial class ExpiryPage : ContentPage
 {
     private ExpiryDatabase eDatabase = new ();
     public required AsyncCommand<int> NewExpiryCommand { get; init; }
+    private readonly List<string> cList = [];
+    private List<Expiry> eCollection = [];
+    private List <Category> cCollection = [];
     public ExpiryPage()
 	{
         try
@@ -21,7 +25,6 @@ public partial class ExpiryPage : ContentPage
         }
     }
 
-    private readonly List<string> cList = [];
 
     protected override void OnAppearing()
     {
@@ -44,11 +47,12 @@ public partial class ExpiryPage : ContentPage
             base.OnAppearing();
 
             // Fetch the data
-            var eCollection = await eDatabase.GetExpiriesAsync();
-            var cCollection = await eDatabase.GetCategoriesAsync();
+            eCollection = await eDatabase.GetExpiriesAsync();
+            cCollection = await eDatabase.GetCategoriesAsync();
 
             // Bind data to ListView
             expiryListView.ItemsSource = eCollection;
+            await WarnExpiredAsync();
 
             foreach (var category in cCollection)
             {
@@ -65,6 +69,22 @@ public partial class ExpiryPage : ContentPage
         }
     }
 
+    private async Task WarnExpiredAsync()
+    {
+        string expiredItemList = "";
+        foreach (var item in eCollection)
+        {
+            if (item.ExpiryDateTime < DateTime.Now)
+            {
+                expiredItemList += item.Name + "\n";
+            }
+        }
+
+        if (expiredItemList == "")
+            return;
+        else
+            await DisplayAlert("Warning", "Item " + expiredItemList + " has expired!", "Ok");
+    }
     private async Task New_ExpiryAsync()
     {
         try

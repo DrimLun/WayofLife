@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WayofLifev2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+97b92ff6c2f2136e2424b1165aba64538af11656")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+cb03ab2ba2be8f39b4ce77fe86cbd16d2065e924")]
 [assembly: System.Reflection.AssemblyProductAttribute("WayofLifev2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WayofLifev2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
