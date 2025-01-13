@@ -14,7 +14,7 @@
                     <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
                     <ListView
                         x:Name="expiryListView"
-                        ItemSelected="expiryListView_ItemSelected"
+                        ItemSelected="ExpiryListView_ItemSelected"
                         SelectionMode="Single">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -22,7 +22,9 @@
                                     <!--  ViewCell can only contain one "StackLayout"  -->
                                     <StackLayout>
 
-                                        <StackLayout Padding="30" Orientation="Vertical">
+                                        <StackLayout Padding="30" Orientation="Horizontal">
+                                            <Label Text="{Binding Id}" />
+                                            <Label Text=". " />
                                             <Label Text="{Binding Name}" />
                                         </StackLayout>
 
@@ -34,20 +36,6 @@
                                             <Label Text="{Binding ExpiryDateTime}" />
                                         </StackLayout>
 
-                                        <ImageButton
-                                            Command="{Binding Source={x:Reference expiryPage}, Path=DeleteCommand}"
-                                            CommandParameter="{Binding Id}"
-                                            HeightRequest="40"
-                                            WidthRequest="40">
-                                            <ImageButton.Source>
-                                                <FontImageSource
-                                                    FontFamily="FluentIcons"
-                                                    Glyph="&#xE74D;"
-                                                    Size="24"
-                                                    Color="Red" />
-                                            </ImageButton.Source>
-                                        </ImageButton>
-
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
@@ -56,6 +44,7 @@
 
                 </VerticalStackLayout>
                 <StackLayout Grid.Column="1" Padding="10">
+                    <Label x:Name="lblId" Text="" />
                     <Entry x:Name="enName" Placeholder="Name" />
                     <Label Text="Expiry Date" />
                     <DatePicker x:Name="pickDate" />
@@ -64,10 +53,19 @@
 
                     <!--  You see, expiryPage doesn't need semicolons here too. It's a XAML file.  -->
                     <Button
-                        Command="{Binding Source={x:Reference expiryPage}, Path=NewExpiryCommand}"
+                        Clicked="NewButton_Clicked"
                         HorizontalOptions="Center"
                         Text="New Item"
                         VerticalOptions="Center" />
+
+                    <ImageButton
+                        x:Name="btnDeleteExpiry"
+                        Clicked="DeleteButton_Clicked"
+                        HeightRequest="40"
+                        IsEnabled="False"
+                        Source="delete_button.png"
+                        ToolTipProperties.Text="Delete Selected Item"
+                        WidthRequest="40" />
                 </StackLayout>
             </Grid>
         </VerticalStackLayout>

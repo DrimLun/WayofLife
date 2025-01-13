@@ -6,17 +6,14 @@ namespace WayofLife.Pages;
 
 public partial class ExpiryPage : ContentPage
 {
-
-    ExpiryDatabase eDatabase = new ();
-    public required AsyncCommand<int> DeleteCommand { get; init; }
+    private ExpiryDatabase eDatabase = new ();
     public required AsyncCommand<int> NewExpiryCommand { get; init; }
     public ExpiryPage()
 	{
         try
         {
             InitializeComponent();
-            DeleteCommand = new AsyncCommand<int>(async (id) => await DeleteButton_ClickedAsync(id));
-            NewExpiryCommand = new AsyncCommand<int>(async(id) => await BtnNewExpiryAsync());
+            NewExpiryCommand = new AsyncCommand<int>(async(id) => await New_ExpiryAsync());
         }
         catch (Exception ex)
         {
@@ -24,7 +21,7 @@ public partial class ExpiryPage : ContentPage
         }
     }
 
-    private List<string> cList = [];
+    private readonly List<string> cList = [];
 
     protected override void OnAppearing()
     {
@@ -53,13 +50,12 @@ public partial class ExpiryPage : ContentPage
             // Bind data to ListView
             expiryListView.ItemsSource = eCollection;
 
-
             foreach (var category in cCollection)
             {
                 if (category.Name != null)
                     cList.Add(category.Name);
                 else
-                    cList.Add("No Category");
+                    continue;
             }
             pickCategory.ItemsSource = cList;
         }
@@ -68,33 +64,14 @@ public partial class ExpiryPage : ContentPage
             HandleException(ex);
         }
     }
-    private void HandleException(Exception ex)
-    {
 
-        string msg = ex.Message.ToString();
-        string caption = "Error";
-
-        try
-        {
-            //https://stackoverflow.com/questions/21307789/how-to-save-exception-in-txt-file
-            //new MessageWriteToFile(ex).WriteToFile();
-        }
-        catch (Exception exInEx)
-        {
-            _ = DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.ToString(), "Ok");
-        }
-        finally
-        {
-            _ = DisplayAlert(caption, "Error Occured! See Details Below:\n\n" + msg, "Ok");
-        }
-
-    }
-
-    private async Task BtnNewExpiryAsync()
+    private async Task New_ExpiryAsync()
     {
         try
         {
             Expiry NewExpiry = new(enName.Text, pickDate.Date);
+
+            System.Diagnostics.Debug.WriteLine(pickCategory.SelectedItem);
 
             if (pickCategory.SelectedItem == null)
             {
@@ -106,16 +83,19 @@ public partial class ExpiryPage : ContentPage
             }
 
             await eDatabase.SaveExpiryAsync(NewExpiry);
-            await Shell.Current.GoToAsync(".");
+
+            _ = RefreshDataAsync();
         }
         catch (Exception ex)
         {
             HandleException(ex);
         }
     }
-
-
-    private async Task DeleteButton_ClickedAsync(int id)
+    private void NewButton_Clicked(object sender, EventArgs e)
+    {
+        _ = New_ExpiryAsync();
+    }
+    private async Task Delete_ExpiryAsync(int id)
     {
         try
         {
@@ -142,19 +122,36 @@ public partial class ExpiryPage : ContentPage
         }
     }
 
-    private void expiryListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void ExpiryListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         try
         {
             Expiry selectedExpiry = (Expiry)e.SelectedItem;
 
+            lblId.Text                  = selectedExpiry.Id.ToString();
             enName.Text                 = selectedExpiry.Name;
             pickDate.Date               = selectedExpiry.ExpiryDateTime;
             pickCategory.SelectedItem   = selectedExpiry.Category;
+
+            btnDeleteExpiry.IsEnabled   = true;
         }
         catch (Exception ex)
         {
             HandleException(ex);
         }
     }
+    private void HandleException(Exception ex)
+    {
+        string msg = ex.Message.ToString();
+
+        _ = DisplayAlert("Expiry Page Error", "Error Occured! See Details Below:\n\n" + ex, "Ok");
+
+    }
+
+    private void DeleteButton_Clicked(object sender, EventArgs e)
+    {
+        _ = Delete_ExpiryAsync(Convert.ToInt32(lblId.Text));
+    }
+
+
 }

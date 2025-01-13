@@ -590,3 +590,7 @@ C:\Users\NathanSim\source\repos\WayofLifev2\obj\Debug\net9.0-windows10.0.19041.0
 C:\Users\NathanSim\source\repos\WayofLifev2\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt
 C:\Users\NathanSim\source\repos\WayofLifev2\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt.intermediate
 C:\Users\NathanSim\source\repos\WayofLifev2\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
+C:\Users\NathanSim\source\repos\WayofLifev2\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\delete_button.scale-100.png
+C:\Users\NathanSim\source\repos\WayofLifev2\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\refresh_button.scale-100.jpeg
+C:\Users\NathanSim\source\repos\WayofLifev2\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\delete_button.scale-100.png
+C:\Users\NathanSim\source\repos\WayofLifev2\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\refresh_button.scale-100.jpeg

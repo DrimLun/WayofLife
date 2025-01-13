@@ -1,4 +1,7 @@
-﻿using SQLite;
+﻿//Model: Expiry
+using SQLite;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace WayofLifev2.Models
 {
@@ -8,14 +11,8 @@ namespace WayofLifev2.Models
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Category { get; set; }
-        //public DateOnly ExpiryDate { get; set; }
         public DateTime ExpiryDateTime { get; set; }
 
-        public Expiry(string name, DateOnly expiryDate)
-        {
-            Name = name;
-            //ExpiryDate = expiryDate;
-        }
         public Expiry(string name, DateTime expiryDateTime)
         {
             Name = name;
@@ -23,7 +20,6 @@ namespace WayofLifev2.Models
         }
         public Expiry()
         {
-            //ExpiryDate = new DateOnly();
             ExpiryDateTime = new DateTime();
         }
     }
