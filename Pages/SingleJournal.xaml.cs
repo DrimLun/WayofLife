@@ -1,13 +1,12 @@
 using WayofLife.ViewModel;
 using WayofLifev2.Database_File;
 using WayofLifev2.Models;
-using WayofLifev2.Repositories;
 
 namespace WayofLifev2.Pages;
 
 public partial class SingleJournal : ContentPage
 {
-    private JournalDatabase jdatabase = new ();
+    private readonly JournalDatabase jdatabase = new ();
 
     static int selectedID = 0;
 	public SingleJournal(JournalViewModel vm, int id)
@@ -41,29 +40,15 @@ public partial class SingleJournal : ContentPage
         }
         catch(Exception ex)
         {
-            handleException(ex);
+            HandleException(ex);
         }
     }
 
-    private async void handleException(Exception ex)
+    private void HandleException(Exception ex)
     {
-
         string msg = ex.Message.ToString();
-        string caption = "Error";
 
-        try
-        {
-            //https://stackoverflow.com/questions/21307789/how-to-save-exception-in-txt-file
-            //new MessageWriteToFile(ex).WriteToFile();
-        }
-        catch (Exception exInEx)
-        {
-            await DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.Message.ToString(), "Ok");
-        }
-        finally
-        {
-            await DisplayAlert(caption, "Error Occured! See Details Below:\n\n" + msg, "Ok");
-        }
+        _ = DisplayAlert("Expiry Page Error", "Error Occured! See Details Below:\n\n" + ex, "Ok");
 
     }
 }

@@ -3,20 +3,60 @@
     x:Class="WayofLifev2.Pages.SingleJournal"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="SingleJournal">
-    <VerticalStackLayout>
+    Title="Journal">
 
-        <StackLayout>
-            <Label x:Name="lblTitle" Text="" />
-        </StackLayout>
+    <Grid
+        Padding="10,0,10,0"
+        ColumnDefinitions="*, *, *, *"
+        RowDefinitions="*, *, *, 4*">
 
-        <Label x:Name="lblCategory" />
+        <Label
+            x:Name="lblTitle"
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="" />
 
-        <Label x:Name="lblDateTime" Text="" />
+        <Label
+            x:Name="lblCategory"
+            Grid.Row="1"
+            Grid.Column="0" />
 
-        <Label x:Name="lblContent" Text="" />
+        <Label
+            x:Name="lblDateTime"
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="" />
+
+        <Label
+            x:Name="lblContent"
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="" />
 
         <!--<Image />-->
 
-    </VerticalStackLayout>
+        <Entry
+            x:Name="enTitle"
+            Grid.Row="0"
+            Grid.Column="2"
+            IsEnabled="False" />
+        <Entry
+            x:Name="enCategory"
+            Grid.Row="1"
+            Grid.Column="2"
+            IsEnabled="False" />
+        <Entry
+            x:Name="enDateTime"
+            Grid.Row="0"
+            Grid.Column="2"
+            IsEnabled="False" />
+        <Entry
+            x:Name="enContent"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            IsEnabled="False" />
+
+    </Grid>
+
 </ContentPage>

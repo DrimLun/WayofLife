@@ -15,7 +15,6 @@ public partial class AddJournalPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = vm;
-
     }
 
     private JournalDatabase journalDatabase = new();
@@ -88,7 +87,7 @@ public partial class AddJournalPage : ContentPage
             string inCategory = enCategory.SelectedItem.ToString()!;
             string inImageContentPath = "";
 
-            Journal newJournal = new Journal(inTitle, inCategory, inWrittenContent, inImageContentPath);
+            Journal newJournal = new(inTitle, inCategory, inWrittenContent, inImageContentPath);
 
             await journalDatabase.SaveJournalAsync(newJournal);
             await Shell.Current.GoToAsync("..");
