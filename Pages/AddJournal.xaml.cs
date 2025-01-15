@@ -1,14 +1,12 @@
 using System.Collections.ObjectModel;
-using WayofLife.ViewModel;
 using WayofLifev2.Database_File;
 using WayofLifev2.Models;
-using WayofLifev2.Repositories;
+using WayofLifev2.ViewModel;
 
 namespace WayofLife.Pages;
 
 public partial class AddJournal : ContentPage
 {
-
     public AddJournal(JournalViewModel vm)
 	{
 		InitializeComponent();

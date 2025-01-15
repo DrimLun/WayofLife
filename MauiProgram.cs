@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using WayofLife.Pages;
-using WayofLife.ViewModel;
+using WayofLifev2.ViewModel;
 
 namespace WayofLifev2
 {

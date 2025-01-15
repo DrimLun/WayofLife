@@ -1,9 +1,8 @@
 using System.Collections.ObjectModel;
-using WayofLife.ViewModel;
+using WayofLifev2.ViewModel;
 using WayofLifev2.Database_File;
 using WayofLifev2.Models;
 using WayofLifev2.Pages;
-using WayofLifev2.Repositories;
 
 namespace WayofLife.Pages;
 
@@ -64,13 +63,18 @@ public partial class JournalPage : ContentPage
     //https://devblogs.microsoft.com/dotnet/announcing-dotnet-maui-preview-11/
 
     //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/button?view=net-maui-9.0
-    private async void BtnNewJournal(object sender, EventArgs e)
+    private void BtnNewJournal(object sender, EventArgs e)
+    {
+        _= NewJournalAsync();
+    }
+
+    private async Task NewJournalAsync()
     {
         try
         {
             var journalViewModel = new JournalViewModel(); // Create or reuse an instance
 
-            await Navigation.PushAsync(page: new AddJournalPage(journalViewModel));
+            await Navigation.PushAsync(page: new AddJournal(journalViewModel));
         }
         catch (Exception ex)
         {

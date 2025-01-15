@@ -1,20 +1,23 @@
 using MvvmHelpers.Commands;
 using System.Collections.ObjectModel;
-using WayofLife.ViewModel;
 using WayofLifev2.Database_File;
 using WayofLifev2.Models;
+using WayofLifev2.ViewModel;
 
 namespace WayofLife.Pages;
 
 public partial class AddJournalPage : ContentPage
 {
     //https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/object-and-collection-initializers
-    public AsyncCommand AddImage { get; init; }
-    public AsyncCommand<int> AddJournal { get; init; }
+    public AsyncCommand AddImage { get; set; }
+    public AsyncCommand AddJournal { get; set; }
     public AddJournalPage(JournalViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;
+
+        AsyncCommand<int> AddImage = new(async (id) => await BtnAddImages_ClickedAsync());
+        AsyncCommand<int> AddJournal = new(async (id) => await BtnAddJournal_ClickedAsync());
     }
 
     private JournalDatabase journalDatabase = new();
@@ -25,8 +28,6 @@ public partial class AddJournalPage : ContentPage
     {
         base.OnAppearing();
 
-        AsyncCommand<int> AddImage = new AsyncCommand<int>(async (id) => await BtnAddImages_ClickedAsync());
-        AsyncCommand<int> AddJournal = new AsyncCommand<int>(async (id) => await BtnAddJournal_ClickedAsync());
         _ = RefreshDataAsync();
     }
 
