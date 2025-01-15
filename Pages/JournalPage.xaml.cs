@@ -10,68 +10,54 @@ namespace WayofLife.Pages;
 public partial class JournalPage : ContentPage
 {
 
-    JournalDatabase jdatabase = new JournalDatabase();
+    readonly JournalDatabase jdatabase = new();
     public JournalPage()
 	{
         InitializeComponent();
+
+        _=  RefreshJournalsAsync();
     }
 
-    public ObservableCollection<Journal> jCollection = new ObservableCollection<Journal>();
+    public ObservableCollection<Journal> jCollection = [];
 
-    private void RefreshData()
+    private async Task RefreshJournalsAsync()
     {
 
         try
         {
             //Has to be observable collection...
             //public ObservableCollection<Journal> jCollection = new ObservableCollection<Journal>();
+            var jCollection = await jdatabase.GetJournalsAsync();
 
+            // Bind data to ListView
             journalListView.ItemsSource = jCollection;
         }
         catch (Exception ex)
         {
             //catch exception then pass it
-            handleException(ex);
+            HandleException(ex);
         }
     }
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
         try
         {
             base.OnAppearing();
 
-                    // Fetch the data
-                    var jCollection = await jdatabase.GetJournalsAsync();
-
-                    // Bind data to ListView
-                    journalListView.ItemsSource = jCollection;
+            _= RefreshJournalsAsync();
         }
         catch (Exception ex)
         {
-            handleException(ex);
+            HandleException(ex);
         }
     }
 
-    private async void handleException(Exception ex)
+    private void HandleException(Exception ex)
     {
-
         string msg = ex.Message.ToString();
-        string caption = "Error";
 
-        try
-        {
-            //https://stackoverflow.com/questions/21307789/how-to-save-exception-in-txt-file
-            //new MessageWriteToFile(ex).WriteToFile();
-        }
-        catch (Exception exInEx)
-        {
-            await DisplayAlert("Error", "Error Occured! See Details Below:\n\n" + exInEx.Message.ToString(), "Ok");
-        }
-        finally
-        {
-            await DisplayAlert(caption, "Error Occured! See Details Below:\n\n" + msg, "Ok");
-        }
+        _ = DisplayAlert("Expiry Page Error", "Error Occured! See Details Below:\n\n" + ex, "Ok");
 
     }
 
@@ -84,11 +70,11 @@ public partial class JournalPage : ContentPage
         {
             var journalViewModel = new JournalViewModel(); // Create or reuse an instance
 
-            await Navigation.PushAsync(page: new AddJournal(journalViewModel));
+            await Navigation.PushAsync(page: new AddJournalPage(journalViewModel));
         }
         catch (Exception ex)
         {
-            handleException(ex);
+            HandleException(ex);
         }
     }
 
@@ -112,7 +98,7 @@ public partial class JournalPage : ContentPage
         }
         catch (Exception ex)
         {
-            handleException(ex);
+            HandleException(ex);
         }
     }
 
@@ -131,7 +117,7 @@ public partial class JournalPage : ContentPage
         }
         catch (Exception ex)
         {
-            handleException(ex);
+            HandleException(ex);
         }
     }
 }

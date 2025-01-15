@@ -12,7 +12,6 @@ public partial class AddJournal : ContentPage
     public AddJournal(JournalViewModel vm)
 	{
 		InitializeComponent();
-
 		BindingContext = vm;
     }
 
@@ -84,7 +83,7 @@ public partial class AddJournal : ContentPage
             string inCategory = enCategory.SelectedItem.ToString()!;
             string inImageContentPath = "";
 
-            Journal newJournal = new Journal(inTitle, inCategory, inWrittenContent, inImageContentPath);
+            Journal newJournal = new(inTitle, inCategory, inWrittenContent, inImageContentPath);
 
             await journalDatabase.SaveJournalAsync(newJournal);
             await Shell.Current.GoToAsync("..");
@@ -110,6 +109,5 @@ public partial class AddJournal : ContentPage
         {
             await DisplayAlert(caption, "Error Occured! See Details Below:\n\n" + msg, "Ok");
         }
-
     }
 }

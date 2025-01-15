@@ -6,7 +6,9 @@
     Title="Journal">
 
     <Grid
+        Margin="20,10,20,10"
         Padding="10,0,10,0"
+        BackgroundColor="PowderBlue"
         ColumnDefinitions="*, *, *, *"
         RowDefinitions="*, *, *, 4*">
 
@@ -14,23 +16,27 @@
             x:Name="lblTitle"
             Grid.Row="0"
             Grid.Column="0"
+            IsVisible="True"
             Text="" />
 
         <Label
             x:Name="lblCategory"
             Grid.Row="1"
-            Grid.Column="0" />
+            Grid.Column="0"
+            IsVisible="True" />
 
         <Label
             x:Name="lblDateTime"
             Grid.Row="0"
             Grid.Column="1"
+            IsVisible="True"
             Text="" />
 
         <Label
             x:Name="lblContent"
             Grid.Row="2"
             Grid.Column="0"
+            IsVisible="True"
             Text="" />
 
         <!--<Image />-->
@@ -39,24 +45,49 @@
             x:Name="enTitle"
             Grid.Row="0"
             Grid.Column="2"
-            IsEnabled="False" />
-        <Entry
+            IsEnabled="True"
+            IsVisible="False" />
+        <Picker
             x:Name="enCategory"
             Grid.Row="1"
             Grid.Column="2"
-            IsEnabled="False" />
+            IsEnabled="True"
+            IsVisible="False" />
         <Entry
             x:Name="enDateTime"
             Grid.Row="0"
-            Grid.Column="2"
-            IsEnabled="False" />
+            Grid.Column="3"
+            IsEnabled="True"
+            IsVisible="False" />
         <Entry
             x:Name="enContent"
             Grid.Row="2"
             Grid.RowSpan="2"
             Grid.Column="2"
-            IsEnabled="False" />
+            Grid.ColumnSpan="2"
+            IsEnabled="True"
+            IsVisible="False" />
 
+        <Button
+            x:Name="btn_editJournal"
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Clicked="btn_editJournal_Clicked"
+            HorizontalOptions="Center"
+            Text="Edit"
+            VerticalOptions="Center" />
+
+        <Button
+            x:Name="btn_saveJournal"
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Clicked="btn_saveJournal_Clicked"
+            HorizontalOptions="Center"
+            IsVisible="False"
+            Text="Save"
+            VerticalOptions="Center" />
     </Grid>
 
 </ContentPage>

@@ -60,11 +60,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="WayofLifev2 - Copy.csproj" />
-	  <None Include="WayofLifev2 - Copy.csproj.user" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="MessagePack" Version="3.1.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />

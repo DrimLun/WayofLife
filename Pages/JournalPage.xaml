@@ -16,7 +16,6 @@
                 VerticalOptions="Center" />
 
             <VerticalStackLayout Padding="10">
-                <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
                 <ListView
                     x:Name="journalListView"
                     ItemSelected="journalListView_ItemSelected"
@@ -32,7 +31,7 @@
                                     </StackLayout>
 
                                     <StackLayout Padding="30" Orientation="Vertical">
-                                        <Label Text="{Binding Title}" />
+                                        <Label FontAttributes="Bold" Text="{Binding Title}" />
                                     </StackLayout>
 
                                     <StackLayout Padding="10" Orientation="Vertical">
