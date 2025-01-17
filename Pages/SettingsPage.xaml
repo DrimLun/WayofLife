@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WayofLifev2.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Settings">
+
+    <ScrollView>
+        <!--  https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/radiobutton?view=net-maui-9.0  -->
+        <VerticalStackLayout>
+            <Label
+                HorizontalOptions="Center"
+                Text="Motivation Mode"
+                VerticalOptions="Center" />
+
+            <VerticalStackLayout RadioButtonGroup.GroupName="MotivationMode" RadioButtonGroup.SelectedValue="{Binding Selection}">
+                <RadioButton>
+                    <RadioButton.Content>
+                        <Label Text="Rebuilding" />
+                    </RadioButton.Content>
+                </RadioButton>
+
+                <RadioButton>
+                    <RadioButton.Content>
+                        <Label Text="Philosophical" />
+                    </RadioButton.Content>
+                </RadioButton>
+
+                <RadioButton>
+                    <RadioButton.Content>
+                        <Label Text="Hardcore (Explicit Language 18+)" />
+                    </RadioButton.Content>
+                </RadioButton>
+            </VerticalStackLayout>
+            <ListView ItemsSource="{Binding eCNameList}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

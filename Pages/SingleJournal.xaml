@@ -53,6 +53,16 @@
             Grid.Column="2"
             IsEnabled="True"
             IsVisible="False" />
+        <Button
+            x:Name="btn_addCategory"
+            Grid.Row="1"
+            Grid.Column="3"
+            Clicked="Btn_addCategory_Clicked"
+            HorizontalOptions="Center"
+            IsVisible="False"
+            Text="Add Category"
+            VerticalOptions="Center" />
+
         <Entry
             x:Name="enDateTime"
             Grid.Row="0"
@@ -73,7 +83,7 @@
             Grid.Row="3"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Clicked="btn_editJournal_Clicked"
+            Clicked="Btn_editJournal_Clicked"
             HorizontalOptions="Center"
             Text="Edit"
             VerticalOptions="Center" />
@@ -83,7 +93,7 @@
             Grid.Row="3"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Clicked="btn_saveJournal_Clicked"
+            Clicked="Btn_saveJournal_Clicked"
             HorizontalOptions="Center"
             IsVisible="False"
             Text="Save"

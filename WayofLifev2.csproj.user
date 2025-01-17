@@ -21,6 +21,9 @@
     <MauiXaml Update="Pages\JournalPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\SingleJournal.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

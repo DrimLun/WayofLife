@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
-using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SQLite;
 using WayofLife;
 using WayofLifev2.Models;
 
@@ -16,7 +10,7 @@ namespace WayofLifev2.Database
 
         public ExpiryDatabase()
         {
-            Database = new SQLiteAsyncConnection(Constant.DatabasePathExpiry);
+            Database = new SQLiteAsyncConnection(Constants.DatabasePathExpiry);
         }
 
         public async Task InitAsync()

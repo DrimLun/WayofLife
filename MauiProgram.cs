@@ -25,9 +25,10 @@ Before:
 After:
             builder.Services.AddSingleton<JournalDatabase>();
 */
-            builder.Services.AddSingleton<WayofLifev2.Database_File.JournalDatabase>();
+                                        builder.Services.AddSingleton<WayofLifev2.Database_File.JournalDatabase>();
 
             builder.Services.AddTransient<AddJournal>();
+            builder.Services.AddTransient<AddJournalPage>();
             builder.Services.AddTransient<JournalViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();

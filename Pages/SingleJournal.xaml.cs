@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using WayofLifev2.Database_File;
 using WayofLifev2.Models;
 using WayofLifev2.ViewModel;
@@ -12,7 +11,8 @@ public partial class SingleJournal : ContentPage
     private Journal? selectedJournal;
     private static int selectedID = 0;
 
-    protected ObservableCollection<Category> cCollection = [];
+    //Category List to loop through, String list to contain the names...
+    private static List<Category> cCollection = [];
     public List<string> cNameList = [];
 
     public SingleJournal(JournalViewModel vm, int id)
@@ -21,7 +21,6 @@ public partial class SingleJournal : ContentPage
         BindingContext = vm;
 
         selectedID = id;
-        _ = FillCategoryPickerAsync();
     }
 
     protected override async void OnAppearing()
@@ -53,15 +52,22 @@ public partial class SingleJournal : ContentPage
     }
     private async Task FillCategoryPickerAsync()
     {
-        var cCollection = await journalDatabase.GetCategoriesAsync();
+        enCategory.ItemsSource = null;
+        cNameList.Clear();
+        cCollection.Clear();
+        JournalDatabase journalDatabase = new();
+
+        cCollection = await journalDatabase.GetCategoriesAsync();
 
         foreach (Category category in cCollection)
         {
             if (category.Name != null)
                 cNameList.Add(category.Name);
             else
-                cNameList.Add("No Category");
+                continue;
+                //cNameList.Add("No Category");
         }
+
         enCategory.ItemsSource = cNameList;
     }
     private void HandleException(Exception ex)
@@ -72,7 +78,7 @@ public partial class SingleJournal : ContentPage
 
     }
 
-    private void btn_editJournal_Clicked(object sender, EventArgs e)
+    private void Btn_editJournal_Clicked(object sender, EventArgs e)
     {
         lblTitle.IsVisible      = false;
         lblCategory.IsVisible   = false;
@@ -89,16 +95,17 @@ public partial class SingleJournal : ContentPage
         enContent.Text          = selectedJournal!.WrittenContent;
         enDateTime.Text         = selectedJournal!.DateTime.ToString();
 
+        btn_addCategory.IsVisible = true;
         btn_editJournal.IsVisible = false;
         btn_saveJournal.IsVisible = true;
     }
 
-    private void btn_saveJournal_Clicked(object sender, EventArgs e)
+    private void Btn_saveJournal_Clicked(object sender, EventArgs e)
     {
         _ = SaveJournalAsync();
     }
 
-    public async Task SaveJournalAsync()
+    protected async Task SaveJournalAsync()
     {
         if (enContent.Text == null)
         {
@@ -112,12 +119,37 @@ public partial class SingleJournal : ContentPage
             selectedJournal!.Category           = enCategory.SelectedItem.ToString()!;
             selectedJournal!.ImageContentPath   = "";
 
-            //Journal editedJournal = new(inTitle, inCategory, inWrittenContent, inImageContentPath);
-            btn_saveJournal.IsVisible = false;
-            btn_editJournal.IsVisible = true;
-
             await journalDatabase.SaveJournalAsync(selectedJournal);
             await Shell.Current.GoToAsync("..");
+        }
+    }
+
+    private void Btn_addCategory_Clicked(object sender, EventArgs e)
+    {
+        _ = AddCategoryAsync();
+        _ = FillCategoryPickerAsync();
+    }
+
+    protected async Task AddCategoryAsync()
+    {
+        try
+        {
+            string inCatName = await DisplayPromptAsync("Add Category", "Enter Category Name", "Ok", "Cancel", "Category Name");
+            if (inCatName != null)
+            {
+                Category newCategory = new(inCatName, "");
+                await journalDatabase.SaveCategoryAsync(newCategory);
+                await FillCategoryPickerAsync();
+            }
+            else
+            {
+                await DisplayAlert("", "Please enter a category name", "Ok");
+            }
+
+        }
+        catch (Exception ex)
+        {
+            HandleException(ex);
         }
     }
 }

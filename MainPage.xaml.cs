@@ -8,7 +8,7 @@
         {
             InitializeComponent();
 
-            System.Diagnostics.Debug.WriteLine("Local Database File Path: " + Constant.DatabasePath);
+            System.Diagnostics.Debug.WriteLine("Local Database File Path: " + Constants.DatabasePath);
 
             RefreshQuote();
         }

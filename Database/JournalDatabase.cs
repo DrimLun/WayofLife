@@ -12,7 +12,7 @@ namespace WayofLifev2.Database_File
 
         public JournalDatabase()
         {
-            Database = new SQLiteAsyncConnection(Constant.DatabasePath);
+            Database = new SQLiteAsyncConnection(WayofLife.Constants.DatabasePath);
         }
 
         public async Task InitAsync()

@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace WayofLife
 {
-    public static class Constant
+    public static class Constants
     {
         public const string DatabaseFilename = "JournalSQLite.db3";
 
         public const string DatabaseFilenameCategory = "CategorySQLite.db3";
 
         public const string DatabaseFilenameExpiry = "ExpirySQLite.db3";
+
+        public const string DatabaseFilenameQuote = "QuoteSQLite.db3";
 
         public const SQLite.SQLiteOpenFlags Flags =
                 // open the database in read/write mode
@@ -29,5 +31,7 @@ namespace WayofLife
             Path.Combine(FileSystem.AppDataDirectory, DatabaseFilenameCategory);
         public static string DatabasePathExpiry =>
             Path.Combine(FileSystem.AppDataDirectory, DatabaseFilenameCategory);
+
+        public static string DatabasePathQuote => Path.Combine(FileSystem.AppDataDirectory, DatabaseFilenameQuote);
     }
 }

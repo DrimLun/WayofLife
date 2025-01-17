@@ -99,6 +99,9 @@
 	  <MauiXaml Update="Pages\JournalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\SettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\SingleJournal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
