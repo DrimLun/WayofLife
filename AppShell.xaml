@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="WayofLife.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WayofLife"
+    Title="WayofLife"
+    Shell.FlyoutBehavior="Flyout">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Journal"
+        ContentTemplate="{DataTemplate local:Pages.JournalPage}"
+        Route="JournalPage" />
+
+    <ShellContent
+        Title="Expiry Reminder"
+        ContentTemplate="{DataTemplate local:Pages.ExpiryPage}"
+        Route="ExpiryPage" />
+
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate local:Pages.SettingsPage}"
+        Route="SettingsPage" />
+
+</Shell>
