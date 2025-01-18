@@ -17,7 +17,7 @@
             <VerticalStackLayout Padding="10">
                 <ListView
                     x:Name="journalListView"
-                    ItemSelected="journalListView_ItemSelected"
+                    ItemSelected="JournalListView_ItemSelected"
                     SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <!--  https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/compiled-bindings?view=net-maui-9.0  -->

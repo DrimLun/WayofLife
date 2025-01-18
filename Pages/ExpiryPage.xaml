@@ -10,6 +10,12 @@
             <Grid ColumnDefinitions="*, 400" RowDefinitions="Auto, Auto">
                 <VerticalStackLayout Padding="10">
                     <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
+                    <Label
+                        x:Name="lblPlaceholder"
+                        HorizontalOptions="Center"
+                        IsVisible="True"
+                        Text="Nothing here yet..."
+                        VerticalOptions="Center" />
                     <ListView
                         x:Name="expiryListView"
                         ItemSelected="ExpiryListView_ItemSelected"

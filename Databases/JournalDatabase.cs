@@ -30,6 +30,7 @@ namespace WayofLife.Databases
                     await Database.InsertAsync(new Category("Reflection", "Cadet Blue"));
                     await Database.InsertAsync(new Category("Knowledge", "Orange"));
                     await Database.InsertAsync(new Category("Health", "Cyan"));
+                    await Database.InsertAsync(new Category("Other", "White"));
                 }
             }
             else

@@ -9,10 +9,13 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="25">
+        <VerticalStackLayout
+            Padding="30,0"
+            MaximumWidthRequest="100"
+            Spacing="25">
 
-            <!--<Label BindingContext="selectedQuote"></Label>-->
-            <!--<Label Text="{Binding selectedQuote}" FontSize="14" />-->
+            <Picker />
+
             <Label
                 x:Name="QuoteLabel"
                 HorizontalOptions="Center"

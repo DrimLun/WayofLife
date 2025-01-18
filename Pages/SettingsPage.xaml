@@ -31,19 +31,32 @@
                     </RadioButton.Content>
                 </RadioButton>
             </VerticalStackLayout>
-            <ListView ItemSelected="ListView_ItemSelected">
+
+            <Label
+                HorizontalOptions="Center"
+                Text="Expiry Categories"
+                VerticalOptions="Center" />
+            <ListView x:Name="expiryCatListView" ItemsSource="{Binding eCategoryList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
+                            <HorizontalStackLayout>
                                 <Label Text="{Binding Id}" />
                                 <Label Text=". " />
                                 <Label Text="{Binding Name}" />
-                            </StackLayout>
+
+                                <ImageButton
+                                    Clicked="DeleteButton_Clicked"
+                                    CommandParameter="{Binding Id}"
+                                    HeightRequest="40"
+                                    Source="delete_button.png"
+                                    WidthRequest="40" />
+                            </HorizontalStackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

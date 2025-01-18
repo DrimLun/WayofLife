@@ -32,6 +32,7 @@ namespace WayofLife.Databases
                 await Database.InsertAsync(new Category("Pass/Coupon", "Blue"));
                 await Database.InsertAsync(new Category("Vegetable", "Green"));
                 await Database.InsertAsync(new Category("Fruit", "Crimson Red"));
+                await Database.InsertAsync(new Category("Other", "White"));
             }
             else
             {
@@ -70,6 +71,12 @@ namespace WayofLife.Databases
         {
             await InitAsync();
             return await Database.Table<Category>().ToListAsync();
+        }
+
+        public async Task<Category> GetCategoryAsync(int id)
+        {
+            await InitAsync();
+            return await Database.Table<Category>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<int> SaveCategoryAsync(Category item)

@@ -6,7 +6,7 @@ namespace WayofLife.Pages;
 
 public partial class ExpiryPage : ContentPage
 {
-    private ExpiryDatabase eDatabase = new();
+    private readonly ExpiryDatabase eDatabase = new();
     public required AsyncCommand<int> NewExpiryCommand { get; init; }
     private readonly List<string> cList = [];
     private List<Expiry> eCollection = [];
@@ -61,6 +61,9 @@ public partial class ExpiryPage : ContentPage
                     continue;
             }
             pickCategory.ItemsSource = cList;
+
+            if (eCollection.Count != 0)
+                lblPlaceholder.IsVisible = false;
         }
         catch (Exception ex)
         {

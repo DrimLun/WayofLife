@@ -19,7 +19,6 @@ public partial class JournalPage : ContentPage
 
     private async Task RefreshJournalsAsync()
     {
-
         try
         {
             //Has to be observable collection...
@@ -104,7 +103,7 @@ public partial class JournalPage : ContentPage
         }
     }
 
-    private async void journalListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private async void JournalListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         try
         {
