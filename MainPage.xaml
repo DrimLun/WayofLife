@@ -11,10 +11,13 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
-            MaximumWidthRequest="100"
+            MaximumWidthRequest="500"
             Spacing="25">
 
-            <Picker />
+            <Picker
+                x:Name="picker_motivationModes"
+                ItemsSource="{Binding motivationModes}"
+                SelectedIndexChanged="Picker_SelectedIndexChanged" />
 
             <Label
                 x:Name="QuoteLabel"

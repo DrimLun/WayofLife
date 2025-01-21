@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using WayofLife.Databases;
 using WayofLife.ViewModel;
 using WayofLife.Models;
@@ -15,7 +14,7 @@ public partial class AddJournalPage : ContentPage
 
     private JournalDatabase journalDatabase = new();
     private List <Category> cCollection = [];
-    private List<string> cNameList = [];
+    private readonly List<string> cNameList = [];
 
     protected override void OnAppearing()
     {
