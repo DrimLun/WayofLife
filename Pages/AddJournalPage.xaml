@@ -17,12 +17,12 @@
                 <Label Text="Category" />
                 <Picker x:Name="enCategory" />
 
-                <Entry x:Name="enContent" Placeholder="" />
+                <Entry x:Name="enContent" Placeholder="Write something important" />
 
-                <Button
+                <!--<Button
                     x:Name="BtnAddImages"
                     Clicked="BtnAddImages_Clicked"
-                    Text="Add Images" />
+                    Text="Add Images" />-->
 
                 <Button
                     x:Name="BtnAddJournal"

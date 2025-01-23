@@ -7,6 +7,8 @@ namespace WayofLife
         private static List<string> selectedQuotes = [];
         private readonly static List<string> motivationModes = ["Daily", "Rebuilding", "Philosophical", "Hardcore"];
         private readonly static string quoteSettingsPath = @"..\quoteSettings.txt";
+        private string selectedMode = "";
+        private Random random = new();
         public MainPage()
         {
             InitializeComponent();
@@ -14,47 +16,44 @@ namespace WayofLife
             System.Diagnostics.Debug.WriteLine("Local Database File Path: " + Constants.DatabasePath);
 
             picker_motivationModes.ItemsSource = motivationModes;
-            RefreshQuote();
+            selectedMode = File.ReadAllText(quoteSettingsPath, Encoding.UTF8);
+            picker_motivationModes.SelectedItem = selectedMode;
+            switch (selectedMode)
+            {
+                case "Daily":
+                    selectedQuotes.Clear();
+                    selectedQuotes.AddRange(dailyQuotes);
+                    break;
+                case "Rebuilding":
+                    selectedQuotes.Clear();
+                    selectedQuotes.AddRange(rebuildingQuotes);
+                    break;
+                case "Philosophical":
+                    selectedQuotes.Clear();
+                    selectedQuotes.AddRange(philisophicalQuotes);
+                    break;
+                case "Hardcore":
+                    selectedQuotes.Clear();
+                    selectedQuotes.AddRange(hardcoreQuotes);
+                    break;
+            }
+
             GetRandomQuote();
+
+            MainPage.PrintSelectedQuotes("MainPage()");
         }
 
-        private void RefreshQuote()
+        private void saveQuoteMode()
         {
             try
-            {
+            { 
                 if (File.Exists(quoteSettingsPath))
                 {
-                    string quoteSettings = File.ReadAllText(quoteSettingsPath, Encoding.UTF8);
-                    if (quoteSettings.Length > 0)
-                    {
-                        if (quoteSettings == "Daily")
-                        {
-                            selectedQuotes = dailyQuotes;
-                        }
-                        else if (quoteSettings == "Rebuilding")
-                        {
-                            selectedQuotes = rebuildingQuotes;
-                        }
-                        else if (quoteSettings == "Philosophical")
-                        {
-                            selectedQuotes = philisophicalQuotes;
-                        }
-                        else if (quoteSettings == "Hardcore")
-                        {
-                            selectedQuotes = hardcoreQuotes;
-                        }
-                        else
-                        {
-                            selectedQuotes = dailyQuotes;
-                            QuoteLabel.Text += "Error: Invalid quote setting. Defaulting to Daily.";
-                        }
-                    }
-                }
-                else //Default to Daily
-                {
+                    //selectedMode = File.ReadAllText(quoteSettingsPath, Encoding.UTF8);
                     using FileStream fs = File.Create(quoteSettingsPath);
-                    AddText(fs, "Daily");
+                    AddText(fs, selectedMode);
                 }
+                MainPage.PrintSelectedQuotes("RefreshQuote()");
             }
             catch (Exception ex)
             {
@@ -71,12 +70,6 @@ namespace WayofLife
         {
             try
             {
-                Random random = new();
-                if (selectedQuotes.Count == 0)
-                {
-                    RefreshQuote();
-                }
-
                 string selectedQuote = selectedQuotes[random.Next(0, selectedQuotes.Count - 1)];
                 //string selectedQuote = quotes[0];
 
@@ -84,6 +77,8 @@ namespace WayofLife
                 System.Diagnostics.Debug.WriteLine(selectedQuote);
 
                 QuoteLabel.Text = selectedQuote;
+
+                MainPage.PrintSelectedQuotes("GetRandomQuote()");
             }
             catch(Exception ex)
             {
@@ -129,7 +124,6 @@ namespace WayofLife
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            RefreshQuote();
             GetRandomQuote();
         }
 
@@ -137,11 +131,45 @@ namespace WayofLife
         {
             if (picker_motivationModes.SelectedIndex != -1)
             {
-                string selectedMode = motivationModes[picker_motivationModes.SelectedIndex];
-                using FileStream fs = File.Create(quoteSettingsPath);
-                AddText(fs, selectedMode);
-                RefreshQuote();
-                GetRandomQuote();
+                this.selectedMode = motivationModes[picker_motivationModes.SelectedIndex];
+
+                switch(selectedMode)
+                {
+                    case "Daily":
+                        selectedQuotes.Clear();
+                        selectedQuotes.AddRange(dailyQuotes);
+                        break;
+                    case "Rebuilding":
+                        selectedQuotes.Clear();
+                        selectedQuotes.AddRange(rebuildingQuotes);
+                        break;
+                    case "Philosophical":
+                        selectedQuotes.Clear();
+                        selectedQuotes.AddRange(philisophicalQuotes);
+                        break;
+                    case "Hardcore":
+                        selectedQuotes.Clear();
+                        selectedQuotes.AddRange(hardcoreQuotes);
+                        break;
+                }
+
+                saveQuoteMode();
+                this.GetRandomQuote();
+
+                PrintSelectedQuotes("Picker()");
+            }
+            else
+            {
+                DisplayAlert("Error", "There is something wrong with the selection...", "Ok");
+            }
+        }
+
+        private static void PrintSelectedQuotes(string methodRunning)
+        {
+            System.Diagnostics.Debug.WriteLine("\n" + methodRunning + ":" + "\nSelected Quotes:\n");
+            foreach (string quote in selectedQuotes)
+            {
+                System.Diagnostics.Debug.WriteLine(quote);
             }
         }
     }

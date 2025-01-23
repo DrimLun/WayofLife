@@ -64,7 +64,7 @@
                 Text="Add Category"
                 VerticalOptions="Center" />
 
-            <Entry
+            <DatePicker
                 x:Name="enDateTime"
                 Grid.Row="0"
                 Grid.Column="3"

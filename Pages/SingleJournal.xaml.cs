@@ -29,7 +29,7 @@ public partial class SingleJournal : ContentPage
 
         try
         {
-            selectedJournal = await this.journalDatabase.GetJournalAsync(selectedID);
+            selectedJournal = await journalDatabase.GetJournalAsync(selectedID);
 
             if (selectedJournal == null)
             {
@@ -86,7 +86,7 @@ public partial class SingleJournal : ContentPage
         enTitle.Text = selectedJournal!.Title;
         enCategory.SelectedItem = selectedJournal!.Category;
         enContent.Text = selectedJournal!.WrittenContent;
-        enDateTime.Text = selectedJournal!.DateTime.ToString();
+        enDateTime.Date = selectedJournal!.DateTime;
 
         btn_addCategory.IsVisible = true;
         btn_editJournal.IsVisible = false;

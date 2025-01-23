@@ -12,7 +12,7 @@
                 Text="Motivation Mode"
                 VerticalOptions="Center" />
 
-            <VerticalStackLayout RadioButtonGroup.GroupName="MotivationMode" RadioButtonGroup.SelectedValue="{Binding Selection}">
+            <!--<VerticalStackLayout RadioButtonGroup.GroupName="MotivationMode" RadioButtonGroup.SelectedValue="{Binding Selection}">
                 <RadioButton>
                     <RadioButton.Content>
                         <Label Text="Rebuilding" />
@@ -30,20 +30,24 @@
                         <Label Text="Hardcore (Explicit Language 18+)" />
                     </RadioButton.Content>
                 </RadioButton>
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
 
             <Label
                 HorizontalOptions="Center"
                 Text="Expiry Categories"
                 VerticalOptions="Center" />
-            <ListView x:Name="expiryCatListView" ItemsSource="{Binding eCategoryList}">
+            <ListView
+                x:Name="expiryCatListView"
+                HorizontalOptions="Center"
+                ItemsSource="{Binding eCategoryList}"
+                VerticalOptions="Center">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <HorizontalStackLayout>
-                                <Label Text="{Binding Id}" />
-                                <Label Text=". " />
-                                <Label Text="{Binding Name}" />
+                                <!--<Label Text="{Binding Id}" />-->
+                                <!--<Label Text=". " />-->
+                                <Label x:Name="lbl_categoryName" Text="{Binding Name}" />
 
                                 <ImageButton
                                     Clicked="DeleteButton_Clicked"
@@ -56,6 +60,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button
+                x:Name="btn_NewExpiryCategory"
+                Clicked="btn_NewExpiryCategory_Clicked"
+                HorizontalOptions="Center"
+                Text="New Category"
+                VerticalOptions="Center" />
 
         </VerticalStackLayout>
     </ScrollView>
