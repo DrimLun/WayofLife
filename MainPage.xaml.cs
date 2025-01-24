@@ -16,7 +16,25 @@ namespace WayofLife
             System.Diagnostics.Debug.WriteLine("Local Database File Path: " + Constants.DatabasePath);
 
             picker_motivationModes.ItemsSource = motivationModes;
-            selectedMode = File.ReadAllText(quoteSettingsPath, Encoding.UTF8);
+
+            if (File.Exists(quoteSettingsPath))
+            {
+                selectedMode = File.ReadAllText(quoteSettingsPath, Encoding.UTF8);
+            }
+            else
+            {
+                if (File.Exists(quoteSettingsPath))
+                {
+                    selectedMode = File.ReadAllText(quoteSettingsPath, Encoding.UTF8);
+                }
+                else
+                {
+                    string writablePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "quoteSettings.txt");
+                    AddText(File.Create(writablePath), "Daily");
+                }
+                //AddText(File.Create(quoteSettingsPath), "Daily");
+            }
+            
             picker_motivationModes.SelectedItem = selectedMode;
             switch (selectedMode)
             {

@@ -80,6 +80,7 @@ public partial class SingleJournal : ContentPage
 
         enCategory.IsVisible = true;
         enTitle.IsVisible = true;
+        lblEntryContent.IsVisible = true;
         enContent.IsVisible = true;
         enDateTime.IsVisible = true;
 
@@ -88,7 +89,7 @@ public partial class SingleJournal : ContentPage
         enContent.Text = selectedJournal!.WrittenContent;
         enDateTime.Date = selectedJournal!.DateTime;
 
-        btn_addCategory.IsVisible = true;
+        //btn_addCategory.IsVisible = true;
         btn_editJournal.IsVisible = false;
         btn_saveJournal.IsVisible = true;
     }

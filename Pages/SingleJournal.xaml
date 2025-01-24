@@ -6,83 +6,94 @@
     Title="Journal">
 
     <ScrollView>
-        <Grid
+        <!--<Grid
             Margin="20,10,20,10"
             Padding="10,0,10,0"
             BackgroundColor="PowderBlue"
-            ColumnDefinitions="*, *, *, *"
-            RowDefinitions="*, *, *, 4*">
-
+            ColumnDefinitions="*, *"
+            RowDefinitions="*, *, *, 4*">-->
+        <VerticalStackLayout Margin="300,10,300,10" Padding="10,0,10,0">
             <Label
                 x:Name="lblTitle"
-                Grid.Row="0"
-                Grid.Column="0"
+                FontSize="Title"
+                HorizontalOptions="CenterAndExpand"
                 IsVisible="True"
+                Style="{StaticResource LabelStyle}"
+                Text="" />
+
+            <Label
+                x:Name="lblDateTime"
+                HorizontalOptions="Fill"
+                IsVisible="True"
+                Style="{StaticResource LabelStyle}"
                 Text="" />
 
             <Label
                 x:Name="lblCategory"
-                Grid.Row="1"
-                Grid.Column="0"
-                IsVisible="True" />
-
-            <Label
-                x:Name="lblDateTime"
-                Grid.Row="0"
-                Grid.Column="1"
                 IsVisible="True"
-                Text="" />
+                Style="{StaticResource LabelStyle}" />
 
             <Label
                 x:Name="lblContent"
-                Grid.Row="2"
-                Grid.Column="0"
+                FontSize="Body"
+                HorizontalOptions="CenterAndExpand"
                 IsVisible="True"
+                Style="{StaticResource LabelStyle}"
                 Text="" />
 
             <!--<Image />-->
 
             <Entry
                 x:Name="enTitle"
-                Grid.Row="0"
-                Grid.Column="2"
                 IsEnabled="True"
-                IsVisible="False" />
-            <Picker
-                x:Name="enCategory"
-                Grid.Row="1"
-                Grid.Column="2"
-                IsEnabled="True"
-                IsVisible="False" />
-            <Button
+                IsVisible="False"
+                MaximumWidthRequest="600"
+                Style="{StaticResource EntryStyle}" />
+            <HorizontalStackLayout>
+                <Picker
+                    x:Name="enCategory"
+                    HorizontalOptions="Center"
+                    IsEnabled="True"
+                    IsVisible="False"
+                    Style="{StaticResource PickerStyle}"
+                    VerticalOptions="Center" />
+
+                <!--<Button
                 x:Name="btn_addCategory"
-                Grid.Row="1"
-                Grid.Column="3"
                 Clicked="Btn_addCategory_Clicked"
                 HorizontalOptions="Center"
                 IsVisible="False"
                 Text="Add Category"
-                VerticalOptions="Center" />
+                VerticalOptions="Center" />-->
 
-            <DatePicker
-                x:Name="enDateTime"
-                Grid.Row="0"
-                Grid.Column="3"
-                IsEnabled="True"
-                IsVisible="False" />
-            <Entry
+                <DatePicker
+                    x:Name="enDateTime"
+                    HorizontalOptions="End"
+                    IsEnabled="True"
+                    IsVisible="False"
+                    Style="{StaticResource DatePickerStyle}" />
+            </HorizontalStackLayout>
+
+
+            <Label
+                x:Name="lblEntryContent"
+                IsVisible="False"
+                Style="{StaticResource LabelStyle}"
+                Text="Content" />
+
+            <Editor
                 x:Name="enContent"
-                Grid.Row="2"
-                Grid.RowSpan="2"
-                Grid.Column="2"
-                Grid.ColumnSpan="2"
+                HeightRequest="300"
                 IsEnabled="True"
-                IsVisible="False" />
+                IsVisible="False"
+                MaximumWidthRequest="700"
+                Style="{StaticResource EntryStyle}"
+                VerticalTextAlignment="End" />
 
             <Button
                 x:Name="btn_editJournal"
                 Grid.Row="3"
-                Grid.Column="1"
+                Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Clicked="Btn_editJournal_Clicked"
                 HorizontalOptions="Center"
@@ -92,13 +103,34 @@
             <Button
                 x:Name="btn_saveJournal"
                 Grid.Row="3"
-                Grid.Column="1"
+                Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Clicked="Btn_saveJournal_Clicked"
                 HorizontalOptions="Center"
                 IsVisible="False"
                 Text="Save"
                 VerticalOptions="Center" />
-        </Grid>
+        </VerticalStackLayout>
+        <!--</Grid>-->
     </ScrollView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+            </Style>
+
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+            </Style>
+
+            <Style x:Key="PickerStyle" TargetType="Picker">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+            </Style>
+
+            <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 </ContentPage>
