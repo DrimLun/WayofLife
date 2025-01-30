@@ -7,11 +7,11 @@
     <ScrollView>
         <!--  https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/radiobutton?view=net-maui-9.0  -->
         <VerticalStackLayout>
-            <Label
+
+            <!--<Label
                 HorizontalOptions="Center"
                 Text="Motivation Mode"
-                VerticalOptions="Center" />
-
+                VerticalOptions="Center" />-->
             <!--<VerticalStackLayout RadioButtonGroup.GroupName="MotivationMode" RadioButtonGroup.SelectedValue="{Binding Selection}">
                 <RadioButton>
                     <RadioButton.Content>

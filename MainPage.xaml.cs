@@ -6,9 +6,9 @@ namespace WayofLife
     {
         private static List<string> selectedQuotes = [];
         private readonly static List<string> motivationModes = ["Daily", "Rebuilding", "Philosophical", "Hardcore"];
-        private readonly static string quoteSettingsPath = @"..\quoteSettings.txt";
+        private readonly static string quoteSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "quoteSettings.ini");
         private string selectedMode = "";
-        private Random random = new();
+        private readonly Random random = new();
         public MainPage()
         {
             InitializeComponent();
@@ -29,8 +29,8 @@ namespace WayofLife
                 }
                 else
                 {
-                    string writablePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "quoteSettings.txt");
-                    AddText(File.Create(writablePath), "Daily");
+                    //string writablePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "quoteSettings.txt");
+                    AddText(File.Create(quoteSettingsPath), "Daily");
                 }
                 //AddText(File.Create(quoteSettingsPath), "Daily");
             }

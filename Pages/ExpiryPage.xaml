@@ -3,77 +3,97 @@
     x:Class="WayofLife.Pages.ExpiryPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WayofLife"
     Title="ExpiryPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:GreaterThanConverter x:Key="GreaterThanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView>
-        <VerticalStackLayout>
+        <StackLayout Orientation="Vertical">
+            <StackLayout.Style>
+                <Style TargetType="StackLayout">
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Width, Source={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource GreaterThanConverter}, ConverterParameter=800}"
+                            TargetType="StackLayout"
+                            Value="True">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                            <Setter Property="MinimumHeightRequest" Value="700" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackLayout.Style>
 
-            <Grid ColumnDefinitions="*, 400" RowDefinitions="Auto, Auto">
-                <VerticalStackLayout Padding="10">
-                    <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
-                    <Label
-                        x:Name="lblPlaceholder"
-                        HorizontalOptions="Center"
-                        IsVisible="True"
-                        Text="Nothing here yet..."
-                        VerticalOptions="Center" />
-                    <ListView
-                        x:Name="expiryListView"
-                        ItemSelected="ExpiryListView_ItemSelected"
-                        SelectionMode="Single">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <!--  ViewCell can only contain one "StackLayout"  -->
-                                    <StackLayout>
+            <VerticalStackLayout Padding="10" VerticalOptions="CenterAndExpand">
+                <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
+                <Label
+                    x:Name="lblPlaceholder"
+                    HorizontalOptions="Center"
+                    IsVisible="True"
+                    Text="Nothing here yet..."
+                    VerticalOptions="Center" />
+                <ListView
+                    x:Name="expiryListView"
+                    ItemSelected="ExpiryListView_ItemSelected"
+                    SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--  ViewCell can only contain one "StackLayout"  -->
+                                <StackLayout>
 
-                                        <StackLayout Padding="30" Orientation="Horizontal">
-                                            <Label Text="{Binding Id}" />
-                                            <Label Text=". " />
-                                            <Label Text="{Binding Name}" />
-                                        </StackLayout>
-
-                                        <StackLayout Padding="10" Orientation="Vertical">
-                                            <Label Text="{Binding Category}" />
-                                        </StackLayout>
-
-                                        <StackLayout Padding="10" Orientation="Vertical">
-                                            <Label Text="{Binding ExpiryDateTime}" />
-                                        </StackLayout>
-
+                                    <StackLayout Padding="10" Orientation="Horizontal">
+                                        <Label Text="{Binding Id}" />
+                                        <Label Text=". " />
+                                        <Label Text="{Binding Name}" />
                                     </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
 
-                </VerticalStackLayout>
-                <StackLayout Grid.Column="1" Padding="10">
-                    <Label x:Name="lblId" Text="" />
-                    <Entry x:Name="enName" Placeholder="Name" />
-                    <Label Text="Expiry Date" />
-                    <DatePicker x:Name="pickDate" />
-                    <!--<Label Text="Expiry Time" />
+                                    <StackLayout Padding="5" Orientation="Vertical">
+                                        <Label Text="{Binding Category}" />
+                                    </StackLayout>
+
+                                    <StackLayout Padding="5" Orientation="Vertical">
+                                        <Label Text="{Binding ExpiryDateTime}" />
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </VerticalStackLayout>
+
+            <StackLayout Padding="10" VerticalOptions="CenterAndExpand">
+                <Label x:Name="lblId" Text="" />
+                <Entry x:Name="enName" Placeholder="Name" />
+                <Label Text="Expiry Date" />
+                <DatePicker x:Name="pickDate" />
+                <!--<Label Text="Expiry Time" />
                     <TimePicker x:Name="pickTime" />-->
-                    <Label Text="Category" />
-                    <Picker x:Name="pickCategory" />
+                <Label Text="Category" />
+                <Picker x:Name="pickCategory" />
 
-                    <!--  You see, expiryPage doesn't need semicolons here too. It's a XAML file.  -->
-                    <Button
-                        Clicked="NewButton_Clicked"
-                        HorizontalOptions="Center"
-                        Text="New Item"
-                        VerticalOptions="Center" />
+                <!--  You see, expiryPage doesn't need semicolons here too. It's a XAML file.  -->
+                <Button
+                    Clicked="NewButton_Clicked"
+                    HorizontalOptions="Center"
+                    Text="Add New Item"
+                    VerticalOptions="Center" />
 
-                    <ImageButton
-                        x:Name="btnDeleteExpiry"
-                        Clicked="DeleteButton_Clicked"
-                        HeightRequest="40"
-                        IsEnabled="False"
-                        Source="delete_button.png"
-                        ToolTipProperties.Text="Delete Selected Item"
-                        WidthRequest="40" />
-                </StackLayout>
-            </Grid>
-        </VerticalStackLayout>
+                <ImageButton
+                    x:Name="btnDeleteExpiry"
+                    Clicked="DeleteButton_Clicked"
+                    HeightRequest="40"
+                    IsEnabled="False"
+                    Source="delete_button.png"
+                    ToolTipProperties.Text="Delete Selected Item"
+                    WidthRequest="40" />
+            </StackLayout>
+
+        </StackLayout>
     </ScrollView>
 </ContentPage>

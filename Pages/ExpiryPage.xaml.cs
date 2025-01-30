@@ -1,4 +1,5 @@
 using MvvmHelpers.Commands;
+using Plugin.LocalNotification;
 using WayofLife.Databases;
 using WayofLife.Models;
 
@@ -32,6 +33,21 @@ public partial class ExpiryPage : ContentPage
             base.OnAppearing();
 
             _ = RefreshDataAsync();
+
+            if (CheckExpiry() != "")
+            {
+            //https://www.youtube.com/watch?v=c_nbI0-FeOo
+                var request = new NotificationRequest
+                {
+                    NotificationId = 100,
+                    Title = "Expired Item",
+                    Description = "Item " + CheckExpiry() + " has expired",
+                    BadgeNumber = 42,
+                    Schedule = new NotificationRequestSchedule { NotifyTime = DateTime.Now.AddSeconds(5), NotifyRepeatInterval = TimeSpan.FromDays(1), }
+                };
+                LocalNotificationCenter.Current.Show(request);
+            }
+            
         }
         catch (Exception ex)
         {
@@ -51,7 +67,8 @@ public partial class ExpiryPage : ContentPage
 
             // Bind data to ListView
             expiryListView.ItemsSource = eCollection;
-            await WarnExpiredAsync();
+
+            await WarnExpiredAsync(CheckExpiry());
 
             foreach (var category in cCollection)
             {
@@ -71,7 +88,7 @@ public partial class ExpiryPage : ContentPage
         }
     }
 
-    private async Task WarnExpiredAsync()
+    private string CheckExpiry()
     {
         string expiredItemList = "";
         foreach (var item in eCollection)
@@ -80,7 +97,13 @@ public partial class ExpiryPage : ContentPage
             {
                 expiredItemList += item.Name + "\n";
             }
+
         }
+
+        return expiredItemList;
+    }
+    private async Task WarnExpiredAsync(string expiredItemList)
+    {
 
         if (expiredItemList == "")
             return;
@@ -150,7 +173,7 @@ public partial class ExpiryPage : ContentPage
         {
             Expiry selectedExpiry = (Expiry)e.SelectedItem;
 
-            lblId.Text = selectedExpiry.Id.ToString();
+            lblId.Text = "ID: " + selectedExpiry.Id.ToString();
             enName.Text = selectedExpiry.Name;
             pickDate.Date = selectedExpiry.ExpiryDateTime;
             pickCategory.SelectedItem = selectedExpiry.Category;
