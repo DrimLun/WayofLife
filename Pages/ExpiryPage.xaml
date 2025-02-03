@@ -8,8 +8,32 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:GreaterThanConverter x:Key="GreaterThanConverter" />
+
+            <Style x:Key="LabelStyle" TargetType="Entry">
+                <Setter Property="Margin" Value="15, 0, 10, 10" />
+            </Style>
+
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="DatePickerStyle" TargetType="Entry">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="StackLayoutStyle" TargetType="VerticalStackLayout">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="MinimumWidthRequest" Value="500" />
+                <Setter Property="Margin" Value="20, 0, 20, 0" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <ScrollView>
         <StackLayout Orientation="Vertical">
             <StackLayout.Style>
@@ -21,13 +45,14 @@
                             Value="True">
                             <Setter Property="Orientation" Value="Horizontal" />
                             <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                            <Setter Property="MinimumHeightRequest" Value="700" />
+                            <Setter Property="MinimumHeightRequest" Value="500" />
+                            <Setter Property="MinimumWidthRequest" Value="500" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </StackLayout.Style>
 
-            <VerticalStackLayout Padding="10" VerticalOptions="CenterAndExpand">
+            <VerticalStackLayout Style="{StaticResource StackLayoutStyle}">
                 <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
                 <Label
                     x:Name="lblPlaceholder"
@@ -35,10 +60,12 @@
                     IsVisible="True"
                     Text="Nothing here yet..."
                     VerticalOptions="Center" />
+
                 <ListView
                     x:Name="expiryListView"
                     ItemSelected="ExpiryListView_ItemSelected"
-                    SelectionMode="Single">
+                    SelectionMode="Single"
+                    VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -51,13 +78,9 @@
                                         <Label Text="{Binding Name}" />
                                     </StackLayout>
 
-                                    <StackLayout Padding="5" Orientation="Vertical">
-                                        <Label Text="{Binding Category}" />
-                                    </StackLayout>
+                                    <Label Style="{Binding LabelStyle}" Text="{Binding Category}" />
 
-                                    <StackLayout Padding="5" Orientation="Vertical">
-                                        <Label Text="{Binding ExpiryDateTime}" />
-                                    </StackLayout>
+                                    <Label Text="{Binding ExpiryDateTime}" />
 
                                 </StackLayout>
                             </ViewCell>
@@ -67,18 +90,26 @@
 
             </VerticalStackLayout>
 
-            <StackLayout Padding="10" VerticalOptions="CenterAndExpand">
-                <Label x:Name="lblId" Text="" />
-                <Entry x:Name="enName" Placeholder="Name" />
-                <Label Text="Expiry Date" />
-                <DatePicker x:Name="pickDate" />
+            <VerticalStackLayout Style="{StaticResource StackLayoutStyle}">
+                <Label
+                    x:Name="lblId"
+                    IsVisible="Hidden"
+                    Style="{StaticResource LabelStyle}" />
+                <Label Style="{StaticResource LabelStyle}" Text="Name" />
+                <Entry
+                    x:Name="enName"
+                    Placeholder="Name"
+                    Style="{StaticResource EntryStyle}" />
+                <Label Style="{StaticResource LabelStyle}" Text="Expiry Date" />
+                <DatePicker x:Name="pickDate" Style="{StaticResource DatePickerStyle}" />
                 <!--<Label Text="Expiry Time" />
                     <TimePicker x:Name="pickTime" />-->
-                <Label Text="Category" />
-                <Picker x:Name="pickCategory" />
+                <Label Style="{StaticResource LabelStyle}" Text="Category" />
+                <Picker x:Name="pickCategory" Margin="15,0,20,0" />
 
                 <!--  You see, expiryPage doesn't need semicolons here too. It's a XAML file.  -->
                 <Button
+                    Margin="20,0,10,0"
                     Clicked="NewButton_Clicked"
                     HorizontalOptions="Center"
                     Text="Add New Item"
@@ -92,8 +123,9 @@
                     Source="delete_button.png"
                     ToolTipProperties.Text="Delete Selected Item"
                     WidthRequest="40" />
-            </StackLayout>
+            </VerticalStackLayout>
 
         </StackLayout>
     </ScrollView>
+
 </ContentPage>

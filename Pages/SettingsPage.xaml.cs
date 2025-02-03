@@ -22,6 +22,8 @@ public partial class SettingsPage : ContentPage
         eCategoryList = await expiryDatabase.GetCategoriesAsync();
 
         expiryCatListView.ItemsSource = eCategoryList;
+
+        lbl_loading.IsVisible = false;
     }
 
     //https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated

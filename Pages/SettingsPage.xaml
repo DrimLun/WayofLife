@@ -4,9 +4,21 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="SettingsPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="StackLayoutStyle" TargetType="VerticalStackLayout">
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="MinimumWidthRequest" Value="500" />
+                <Setter Property="Margin" Value="20, 0, 20, 0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ScrollView>
         <!--  https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/radiobutton?view=net-maui-9.0  -->
-        <VerticalStackLayout>
+        <VerticalStackLayout Style="{StaticResource StackLayoutStyle}">
 
             <!--<Label
                 HorizontalOptions="Center"
@@ -36,6 +48,9 @@
                 HorizontalOptions="Center"
                 Text="Expiry Categories"
                 VerticalOptions="Center" />
+
+            <Label x:Name="lbl_loading" Text="Loading..." />
+
             <ListView
                 x:Name="expiryCatListView"
                 HorizontalOptions="Center"

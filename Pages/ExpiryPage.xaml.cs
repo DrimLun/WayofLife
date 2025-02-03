@@ -7,11 +7,11 @@ namespace WayofLife.Pages;
 
 public partial class ExpiryPage : ContentPage
 {
-    private readonly ExpiryDatabase eDatabase = new();
+    private readonly static ExpiryDatabase eDatabase = new();
     public required AsyncCommand<int> NewExpiryCommand { get; init; }
-    private readonly List<string> cList = [];
-    private List<Expiry> eCollection = [];
-    private List<Category> cCollection = [];
+    private static readonly List<string> cList = [];
+    public static List<Expiry> eCollection = [];
+    public static List<Category> cCollection = [];
     public ExpiryPage()
     {
         try
@@ -39,11 +39,11 @@ public partial class ExpiryPage : ContentPage
             //https://www.youtube.com/watch?v=c_nbI0-FeOo
                 var request = new NotificationRequest
                 {
-                    NotificationId = 100,
+                    NotificationId = 1000,
                     Title = "Expired Item",
-                    Description = "Item " + CheckExpiry() + " has expired",
+                    Description = "The following item(s) has expired: " + CheckExpiry(),
                     BadgeNumber = 42,
-                    Schedule = new NotificationRequestSchedule { NotifyTime = DateTime.Now.AddSeconds(5), NotifyRepeatInterval = TimeSpan.FromDays(1), }
+                    Schedule = new NotificationRequestSchedule { NotifyTime = DateTime.Now.AddSeconds(0.3), NotifyRepeatInterval = TimeSpan.FromDays(1), }
                 };
                 LocalNotificationCenter.Current.Show(request);
             }
@@ -55,11 +55,10 @@ public partial class ExpiryPage : ContentPage
         }
     }
 
-    private async Task RefreshDataAsync()
+    public async Task RefreshDataAsync()
     {
         try
         {
-            base.OnAppearing();
 
             // Fetch the data
             eCollection = await eDatabase.GetExpiriesAsync();
@@ -67,8 +66,6 @@ public partial class ExpiryPage : ContentPage
 
             // Bind data to ListView
             expiryListView.ItemsSource = eCollection;
-
-            await WarnExpiredAsync(CheckExpiry());
 
             foreach (var category in cCollection)
             {
@@ -81,6 +78,8 @@ public partial class ExpiryPage : ContentPage
 
             if (eCollection.Count != 0)
                 lblPlaceholder.IsVisible = false;
+
+            await WarnExpiredAsync(CheckExpiry());
         }
         catch (Exception ex)
         {
@@ -88,16 +87,15 @@ public partial class ExpiryPage : ContentPage
         }
     }
 
-    private string CheckExpiry()
+    public static string CheckExpiry()
     {
         string expiredItemList = "";
         foreach (var item in eCollection)
         {
             if (item.ExpiryDateTime < DateTime.Now)
             {
-                expiredItemList += item.Name + "\n";
+                expiredItemList += "\n· " + item.Name; //interpunct
             }
-
         }
 
         return expiredItemList;
@@ -173,7 +171,7 @@ public partial class ExpiryPage : ContentPage
         {
             Expiry selectedExpiry = (Expiry)e.SelectedItem;
 
-            lblId.Text = "ID: " + selectedExpiry.Id.ToString();
+            lblId.Text = selectedExpiry.Id.ToString();
             enName.Text = selectedExpiry.Name;
             pickDate.Date = selectedExpiry.ExpiryDateTime;
             pickCategory.SelectedItem = selectedExpiry.Category;
