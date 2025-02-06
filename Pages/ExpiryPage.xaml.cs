@@ -1,5 +1,4 @@
 using MvvmHelpers.Commands;
-using Plugin.LocalNotification;
 using WayofLife.Databases;
 using WayofLife.Models;
 
@@ -33,20 +32,6 @@ public partial class ExpiryPage : ContentPage
             base.OnAppearing();
 
             await RefreshDataAsync();
-
-            if (CheckExpiry() != "")
-            {
-            //https://www.youtube.com/watch?v=c_nbI0-FeOo
-                var request = new NotificationRequest
-                {
-                    NotificationId = 1000,
-                    Title = "Expired Item",
-                    Description = "The following item(s) has expired: " + CheckExpiry(),
-                    BadgeNumber = 42,
-                    Schedule = new NotificationRequestSchedule { NotifyTime = DateTime.Now.AddSeconds(0.3), NotifyRepeatInterval = TimeSpan.FromDays(1), }
-                };
-                LocalNotificationCenter.Current.Show(request);
-            }
 
             await WarnExpiredAsync(CheckExpiry());
         }
@@ -106,7 +91,7 @@ public partial class ExpiryPage : ContentPage
         if (expiredItemList == "")
             return;
         else
-            await DisplayAlert("Warning", "Item " + expiredItemList + " has expired!", "Ok");
+            await DisplayAlert("Warning", "The following item(s) has expired: " + expiredItemList, "Ok");
     }
     private async Task New_ExpiryAsync()
     {
