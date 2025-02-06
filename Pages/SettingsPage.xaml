@@ -10,7 +10,6 @@
             <Style x:Key="StackLayoutStyle" TargetType="VerticalStackLayout">
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="MinimumWidthRequest" Value="500" />
                 <Setter Property="Margin" Value="20, 0, 20, 0" />
             </Style>
         </ResourceDictionary>
@@ -19,30 +18,6 @@
     <ScrollView>
         <!--  https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/radiobutton?view=net-maui-9.0  -->
         <VerticalStackLayout Style="{StaticResource StackLayoutStyle}">
-
-            <!--<Label
-                HorizontalOptions="Center"
-                Text="Motivation Mode"
-                VerticalOptions="Center" />-->
-            <!--<VerticalStackLayout RadioButtonGroup.GroupName="MotivationMode" RadioButtonGroup.SelectedValue="{Binding Selection}">
-                <RadioButton>
-                    <RadioButton.Content>
-                        <Label Text="Rebuilding" />
-                    </RadioButton.Content>
-                </RadioButton>
-
-                <RadioButton>
-                    <RadioButton.Content>
-                        <Label Text="Philosophical" />
-                    </RadioButton.Content>
-                </RadioButton>
-
-                <RadioButton>
-                    <RadioButton.Content>
-                        <Label Text="Hardcore (Explicit Language 18+)" />
-                    </RadioButton.Content>
-                </RadioButton>
-            </VerticalStackLayout>-->
 
             <Label
                 HorizontalOptions="Center"

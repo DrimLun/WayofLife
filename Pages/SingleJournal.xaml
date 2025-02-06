@@ -12,7 +12,7 @@
             BackgroundColor="PowderBlue"
             ColumnDefinitions="*, *"
             RowDefinitions="*, *, *, 4*">-->
-        <VerticalStackLayout Margin="300,10,300,10" Padding="10,0,10,0">
+        <VerticalStackLayout Margin="30,10,30,10" Padding="10,0,10,0">
             <Label
                 x:Name="lblTitle"
                 FontSize="Title"
@@ -43,12 +43,19 @@
 
             <!--<Image />-->
 
+            <Label
+                x:Name="lblEntryTitle"
+                IsVisible="False"
+                Style="{StaticResource LabelStyle}"
+                Text="Title" />
+
             <Entry
                 x:Name="enTitle"
                 IsEnabled="True"
                 IsVisible="False"
                 MaximumWidthRequest="600"
                 Style="{StaticResource EntryStyle}" />
+
             <HorizontalStackLayout>
                 <Picker
                     x:Name="enCategory"
@@ -58,22 +65,14 @@
                     Style="{StaticResource PickerStyle}"
                     VerticalOptions="Center" />
 
-                <!--<Button
-                x:Name="btn_addCategory"
-                Clicked="Btn_addCategory_Clicked"
-                HorizontalOptions="Center"
-                IsVisible="False"
-                Text="Add Category"
-                VerticalOptions="Center" />-->
-
                 <DatePicker
                     x:Name="enDateTime"
                     HorizontalOptions="End"
                     IsEnabled="True"
                     IsVisible="False"
                     Style="{StaticResource DatePickerStyle}" />
-            </HorizontalStackLayout>
 
+            </HorizontalStackLayout>
 
             <Label
                 x:Name="lblEntryContent"
@@ -83,7 +82,6 @@
 
             <Editor
                 x:Name="enContent"
-                HeightRequest="300"
                 IsEnabled="True"
                 IsVisible="False"
                 MaximumWidthRequest="700"

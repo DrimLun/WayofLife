@@ -93,6 +93,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="HotChocolate.Abstractions" Version="14.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="9.0.1" />
 		<PackageReference Include="Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.1" />
@@ -117,6 +118,12 @@
 	  <MauiXaml Update="Pages\SingleJournal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+	  <PackageReference Include="Xamarin.AndroidX.Annotation">
+	    <Version>1.9.1.2</Version>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

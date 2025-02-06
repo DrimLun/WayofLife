@@ -80,6 +80,10 @@ public partial class AddJournalPage : ContentPage
     {
         try
         {
+            string inTitle;
+            string inWrittenContent;
+            string inCategory;
+            string inImageContentPath;
             if (enContent.Text == null)
                     {
                         await DisplayAlert("Error", "Please write something", "Ok");
@@ -87,15 +91,28 @@ public partial class AddJournalPage : ContentPage
                     }
                     else
                     {
-                        string inTitle = enTitle.Text;
-                        string inWrittenContent = enContent.Text;
-                        string inCategory = enCategory.SelectedItem.ToString()!;
-                        string inImageContentPath = "";
+                        if (enCategory.SelectedItem == null)
+                {
+                    inTitle = enTitle.Text;
+                    inWrittenContent = enContent.Text;
+                    inImageContentPath = "";
+                    inCategory = "";
+                    Journal newJournal = new(inTitle, inCategory, inWrittenContent, inImageContentPath);
+                    await journalDatabase.SaveJournalAsync(newJournal);
+                    await Shell.Current.GoToAsync("..");
+                }
+                        else if (enCategory.SelectedItem.ToString() != null)
+                {
+                        inTitle = enTitle.Text;
+                        inWrittenContent = enContent.Text;
+                        inCategory = enCategory.SelectedItem.ToString()!;
+                        inImageContentPath = "";
+                    Journal newJournal = new(inTitle, inCategory, inWrittenContent, inImageContentPath);
 
-                        Journal newJournal = new(inTitle, inCategory, inWrittenContent, inImageContentPath);
+                    await journalDatabase.SaveJournalAsync(newJournal);
+                    await Shell.Current.GoToAsync("..");
+                }
 
-                        await journalDatabase.SaveJournalAsync(newJournal);
-                        await Shell.Current.GoToAsync("..");
                     }
         }
         catch (Exception ex)

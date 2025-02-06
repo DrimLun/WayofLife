@@ -55,7 +55,6 @@ public partial class SingleJournal : ContentPage
         enCategory.ItemsSource = null;
         cNameList.Clear();
         cCollection.Clear();
-        JournalDatabase journalDatabase = new();
 
         cCollection = await journalDatabase.GetCategoriesAsync();
 

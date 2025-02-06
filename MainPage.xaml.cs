@@ -1,10 +1,13 @@
-﻿using System.Text;
+﻿using Plugin.LocalNotification;
+using System.Text;
+using WayofLife.Databases;
+using WayofLife.Models;
 
 namespace WayofLife
 {
     public partial class MainPage : ContentPage
     {
-        private static List<string> selectedQuotes = [];
+        public static List<string> selectedQuotes = [];
         private readonly static List<string> motivationModes = ["Daily", "Rebuilding", "Philosophical", "Hardcore"];
         private readonly static string quoteSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "quoteSettings.ini");
         private string selectedMode = "";
@@ -58,10 +61,10 @@ namespace WayofLife
 
             GetRandomQuote();
 
-            MainPage.PrintSelectedQuotes("MainPage()");
+            //PrintSelectedQuotes("MainPage()"); //Debugging
         }
 
-        private void saveQuoteMode()
+        private void SaveQuoteMode()
         {
             try
             { 
@@ -110,6 +113,7 @@ namespace WayofLife
             "The only person you should try to be better than is the person you were yesterday. - Anonymous",
             "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
             "The world breaks everyone, and afterward, some are strong at the broken places. - Ernest Hemingway",
+            "The world ain't all sunshine and rainbows. -- Rocky"
         ];
 
         private static readonly List<string> dailyQuotes =
@@ -128,7 +132,7 @@ namespace WayofLife
                 "\"All you have to do...is look within\" -- John Greetings (Interface)",
                 "\"What are we waiting for? Just for the stars to align?!\" -- David Goggins",
                 "\"There Is A Difference Between Knowing The Path And Walking The Path.\" - - Morpheus",
-            "The only way to get rid of a temptation is to yield to it. - Napoleon Bonaparte",
+                "The only way to get rid of a temptation is to yield to it. - Napoleon Bonaparte",
             ];
 
         private static readonly List<string> hardcoreQuotes = [
@@ -138,6 +142,7 @@ namespace WayofLife
             "You gain knowledge through suffering. -- David Goggins",
             "No pain, no gain. -- Arnold Schwarzenegger",
             "There's a lot of motherfuckers out there, who wants what you have! -- David Goggins",
+            "Y'all don't what it is to do the hard work! -- David Goggins"
             ];
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -171,7 +176,7 @@ namespace WayofLife
                         break;
                 }
 
-                saveQuoteMode();
+                SaveQuoteMode();
                 this.GetRandomQuote();
 
                 PrintSelectedQuotes("Picker()");
@@ -189,6 +194,54 @@ namespace WayofLife
             {
                 System.Diagnostics.Debug.WriteLine(quote);
             }
+        }
+
+        private readonly static ExpiryDatabase eDatabase = new();
+        private static List<Expiry> eCollection = [];
+        protected override async void OnAppearing()
+        {
+            try
+            {
+                base.OnAppearing();
+
+                await RFExpiry();
+
+                if (CheckExpiry() != "")
+                {
+                    //https://www.youtube.com/watch?v=c_nbI0-FeOo
+                    var request = new NotificationRequest
+                    {
+                        NotificationId = 1000,
+                        Title = "Expired Item",
+                        Description = "The following item(s) has expired: " + CheckExpiry(),
+                        BadgeNumber = 42,
+                        Schedule = new NotificationRequestSchedule { NotifyTime = DateTime.Now.AddSeconds(0.3), NotifyRepeatInterval = TimeSpan.FromDays(1), }
+                    };
+                    LocalNotificationCenter.Current.Show(request);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+        }
+        private async static Task RFExpiry()
+        {
+            eCollection = await eDatabase.GetExpiriesAsync();
+        }
+
+        public static string CheckExpiry()
+        {
+            string expiredItemList = "";
+            foreach (var item in eCollection)
+            {
+                if (item.ExpiryDateTime < DateTime.Now)
+                {
+                    expiredItemList += "\n· " + item.Name; //interpunct
+                }
+            }
+
+            return expiredItemList;
         }
     }
 

@@ -14,13 +14,17 @@ namespace WayofLife.Databases
 
         public async Task InitAsync()
         {
-            if (Database != null)
-            {
+            //if (Database != null)
+            //{
                 var journalTableInfo = await Database.GetTableInfoAsync("Journal");
                 if (journalTableInfo.Count == 0) // Create the table only if it doesn't exist
                 {
                     await Database.CreateTableAsync<Journal>();
                 }
+                else
+            {
+                System.Diagnostics.Debug.WriteLine("Table Journal already exists");
+            }
 
                 var categoryTableInfo = await Database.GetTableInfoAsync("Category");
                 if (categoryTableInfo.Count == 0)
@@ -32,11 +36,15 @@ namespace WayofLife.Databases
                     await Database.InsertAsync(new Category("Health", "Cyan"));
                     await Database.InsertAsync(new Category("Other", "White"));
                 }
-            }
-            else
+                else
             {
-                System.Diagnostics.Debug.WriteLine("Database is not initialized."); // Debug
+                System.Diagnostics.Debug.WriteLine("Table Category already exists");
             }
+            //}
+            //else
+            //{
+            //    System.Diagnostics.Debug.WriteLine("Database is not initialized."); // Debug
+            //}
         }
 
         public async Task<List<Journal>> GetJournalsAsync()

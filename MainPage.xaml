@@ -16,10 +16,16 @@
             MaximumWidthRequest="500"
             Spacing="25">
 
+            <Label
+                FontSize="Title"
+                HorizontalOptions="Center"
+                Text="Motivation Mode"
+                VerticalOptions="Center" />
             <Picker x:Name="picker_motivationModes" SelectedIndexChanged="Picker_SelectedIndexChanged" />
 
             <Label
                 x:Name="QuoteLabel"
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
 

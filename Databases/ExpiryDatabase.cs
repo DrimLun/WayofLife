@@ -5,7 +5,7 @@ namespace WayofLife.Databases
 {
     internal class ExpiryDatabase
     {
-        private SQLiteAsyncConnection Database;
+        private readonly SQLiteAsyncConnection Database;
 
         public ExpiryDatabase()
         {

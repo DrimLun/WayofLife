@@ -28,7 +28,6 @@
             <Style x:Key="StackLayoutStyle" TargetType="VerticalStackLayout">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="MinimumWidthRequest" Value="500" />
                 <Setter Property="Margin" Value="20, 0, 20, 0" />
             </Style>
         </ResourceDictionary>

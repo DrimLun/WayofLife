@@ -11,7 +11,7 @@ public partial class ExpiryPage : ContentPage
     public required AsyncCommand<int> NewExpiryCommand { get; init; }
     private static readonly List<string> cList = [];
     public static List<Expiry> eCollection = [];
-    public static List<Category> cCollection = [];
+    private static List<Category> cCollection = [];
     public ExpiryPage()
     {
         try
@@ -26,13 +26,13 @@ public partial class ExpiryPage : ContentPage
     }
 
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         try
         {
             base.OnAppearing();
 
-            _ = RefreshDataAsync();
+            await RefreshDataAsync();
 
             if (CheckExpiry() != "")
             {
@@ -47,7 +47,8 @@ public partial class ExpiryPage : ContentPage
                 };
                 LocalNotificationCenter.Current.Show(request);
             }
-            
+
+            await WarnExpiredAsync(CheckExpiry());
         }
         catch (Exception ex)
         {
@@ -79,7 +80,6 @@ public partial class ExpiryPage : ContentPage
             if (eCollection.Count != 0)
                 lblPlaceholder.IsVisible = false;
 
-            await WarnExpiredAsync(CheckExpiry());
         }
         catch (Exception ex)
         {
