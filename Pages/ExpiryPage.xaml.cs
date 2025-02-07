@@ -9,7 +9,7 @@ public partial class ExpiryPage : ContentPage
     private readonly static ExpiryDatabase eDatabase = new();
     public required AsyncCommand<int> NewExpiryCommand { get; init; }
     private static readonly List<string> cList = [];
-    public static List<Expiry> eCollection = [];
+    private static List<Expiry> eCollection = [];
     private static List<Category> cCollection = [];
     public ExpiryPage()
     {
@@ -162,6 +162,7 @@ public partial class ExpiryPage : ContentPage
             pickCategory.SelectedItem = selectedExpiry.Category;
 
             btnDeleteExpiry.IsEnabled = true;
+            btnClearExpiry.IsEnabled = true;
         }
         catch (Exception ex)
         {
@@ -179,5 +180,17 @@ public partial class ExpiryPage : ContentPage
     private void DeleteButton_Clicked(object sender, EventArgs e)
     {
         _ = Delete_ExpiryAsync(Convert.ToInt32(lblId.Text));
+    }
+
+    private void ClearButton_Clicked(object sender, EventArgs e)
+    {
+        expiryListView.SelectedItem = new Expiry (); //Haha I figured it out
+        lblId.Text = "";
+        enName.Text = "";
+        pickDate.Date = DateTime.Now;
+        pickCategory.SelectedIndex = -1;
+
+        btnDeleteExpiry.IsEnabled = false;
+        btnClearExpiry.IsEnabled = false;
     }
 }

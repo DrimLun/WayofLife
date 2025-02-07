@@ -114,6 +114,14 @@
                     Text="Add New Item"
                     VerticalOptions="Center" />
 
+                <Button
+                    x:Name="btnClearExpiry"
+                    Margin="20,0,10,0"
+                    Clicked="ClearButton_Clicked"
+                    HorizontalOptions="Center"
+                    Text="Clear"
+                    VerticalOptions="Center" />
+
                 <ImageButton
                     x:Name="btnDeleteExpiry"
                     Clicked="DeleteButton_Clicked"
