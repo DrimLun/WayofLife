@@ -28,8 +28,9 @@
             </Style>
 
             <Style x:Key="StackLayoutStyle" TargetType="VerticalStackLayout">
-                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="MinimumWidthRequest" Value="250" />
                 <Setter Property="Margin" Value="50, 0, 50, 0" />
             </Style>
         </ResourceDictionary>
@@ -53,6 +54,7 @@
                 </Style>
             </StackLayout.Style>
 
+            <!--  Contains ListView  -->
             <VerticalStackLayout Style="{StaticResource StackLayoutStyle}">
                 <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />-->
                 <Label
@@ -71,15 +73,11 @@
                         <DataTemplate>
                             <ViewCell>
                                 <!--  ViewCell can only contain one "StackLayout"  -->
-                                <StackLayout>
+                                <StackLayout MinimumHeightRequest="80">
 
-                                    <StackLayout Padding="5" Orientation="Horizontal">
-                                        <Label Text="{Binding Id}" />
-                                        <Label Text=". " />
-                                        <Label Text="{Binding Name}" />
-                                    </StackLayout>
+                                    <Label FontSize="Title" Text="{Binding Name}" />
 
-                                    <Label Style="{StaticResource LabelStyle}" Text="{Binding Category}" />
+                                    <Label Text="{Binding Category}" />
 
                                     <Label Text="{Binding ExpiryDateTime}" />
 
@@ -110,10 +108,20 @@
 
                 <!--  You see, expiryPage doesn't need semicolons here too. It's a XAML file.  -->
                 <Button
+                    x:Name="btnAddExpiry"
                     Margin="20,0,10,0"
                     Clicked="NewButton_Clicked"
                     HorizontalOptions="Center"
                     Text="Add New Item"
+                    VerticalOptions="Center" />
+
+                <Button
+                    x:Name="btnEditExpiry"
+                    Margin="20,0,10,0"
+                    Clicked="EditButton_Clicked"
+                    HorizontalOptions="Center"
+                    IsVisible="False"
+                    Text="Edit"
                     VerticalOptions="Center" />
 
                 <Button

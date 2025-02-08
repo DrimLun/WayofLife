@@ -93,6 +93,7 @@ public partial class ExpiryPage : ContentPage
         else
             await DisplayAlert("Warning", "The following item(s) has expired: " + expiredItemList, "Ok");
     }
+
     private async Task New_ExpiryAsync()
     {
         try
@@ -136,11 +137,55 @@ public partial class ExpiryPage : ContentPage
     {
         _ = New_ExpiryAsync();
     }
+
+    private async Task EditExpiryAsync()
+    {
+        try
+        {
+            if (enName.Text == "")
+            {
+                await DisplayAlert("Error", "Name cannot be empty", "Ok");
+                return;
+            }
+            else if (pickDate.Date < DateTime.Now)
+            {
+                await DisplayAlert("Error", "Expiry date cannot be in the past or today", "Ok");
+                return;
+            }
+            else
+            {
+                Expiry EditedExpiry = await eDatabase.GetExpiryAsync(Convert.ToInt32(lblId.Text));
+                EditedExpiry.Name = enName.Text;
+                EditedExpiry.ExpiryDateTime = pickDate.Date;
+                if (pickCategory.SelectedItem == null)
+                {
+                    EditedExpiry.Category = "No Category";
+                }
+                else
+                {
+                    EditedExpiry.Category = pickCategory.SelectedItem.ToString();
+                }
+                await eDatabase.SaveExpiryAsync(EditedExpiry);
+
+                ClearEntries();
+            }
+            _ = RefreshDataAsync();
+        }
+        catch (Exception ex)
+        {
+            HandleException(ex);
+        }
+    }
+    private void EditButton_Clicked(object sender, EventArgs e)
+    {
+        _= EditExpiryAsync();
+    }
+
     private async Task Delete_ExpiryAsync(int id)
     {
         try
         {
-            bool confirm = await DisplayAlert("Delete", "Are you sure you want to delete this?", "Yes", "No");
+            bool confirm = await DisplayAlert("Delete", "Are you sure you want to delete this item?", "Yes", "No");
             if (confirm)
             {
                 // Delete from database
@@ -162,6 +207,10 @@ public partial class ExpiryPage : ContentPage
             HandleException(ex);
         }
     }
+    private void DeleteButton_Clicked(object sender, EventArgs e)
+    {
+        _ = Delete_ExpiryAsync(Convert.ToInt32(lblId.Text));
+    }
 
     private void ExpiryListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
@@ -174,6 +223,8 @@ public partial class ExpiryPage : ContentPage
             pickDate.Date = selectedExpiry.ExpiryDateTime;
             pickCategory.SelectedItem = selectedExpiry.Category;
 
+            btnAddExpiry.IsVisible = false;
+            btnEditExpiry.IsVisible = true;
             btnDeleteExpiry.IsEnabled = true;
             btnClearExpiry.IsEnabled = true;
         }
@@ -182,6 +233,7 @@ public partial class ExpiryPage : ContentPage
             HandleException(ex);
         }
     }
+
     private void HandleException(Exception ex)
     {
         string msg = ex.Message.ToString();
@@ -189,21 +241,21 @@ public partial class ExpiryPage : ContentPage
         _ = DisplayAlert("Expiry Page Error", "Error Occured! See Details Below:\n\n" + ex, "Ok");
 
     }
-
-    private void DeleteButton_Clicked(object sender, EventArgs e)
+    private void ClearEntries()
     {
-        _ = Delete_ExpiryAsync(Convert.ToInt32(lblId.Text));
-    }
-
-    private void ClearButton_Clicked(object sender, EventArgs e)
-    {
-        expiryListView.SelectedItem = new Expiry (); //Haha I figured it out
+        expiryListView.SelectedItem = new Expiry(); //Haha I figured it out
         lblId.Text = "";
         enName.Text = "";
         pickDate.Date = DateTime.Now;
         pickCategory.SelectedIndex = -1;
 
+        btnAddExpiry.IsVisible = true;
+        btnEditExpiry.IsVisible = false;
         btnDeleteExpiry.IsEnabled = false;
         btnClearExpiry.IsEnabled = false;
+    }
+    private void ClearButton_Clicked(object sender, EventArgs e)
+    {
+        ClearEntries();
     }
 }
