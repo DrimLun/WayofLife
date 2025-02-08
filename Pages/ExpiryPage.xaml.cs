@@ -97,20 +97,33 @@ public partial class ExpiryPage : ContentPage
     {
         try
         {
-            Expiry NewExpiry = new(enName.Text, pickDate.Date);
-
-            System.Diagnostics.Debug.WriteLine(pickCategory.SelectedItem);
-
-            if (pickCategory.SelectedItem == null)
+            if (enName.Text == "")
             {
-                NewExpiry.Category = "No Category";
+                await DisplayAlert("Error", "Name cannot be empty", "Ok");
+                return;
+            }
+            else if (pickDate.Date < DateTime.Now)
+            {
+                await DisplayAlert("Error", "Expiry date cannot be in the past or today", "Ok");
+                return;
             }
             else
             {
-                NewExpiry.Category = pickCategory.SelectedItem.ToString();
-            }
+                Expiry NewExpiry = new(enName.Text, pickDate.Date);
 
-            await eDatabase.SaveExpiryAsync(NewExpiry);
+                //System.Diagnostics.Debug.WriteLine(pickCategory.SelectedItem); //For debug use
+
+                if (pickCategory.SelectedItem == null)
+                {
+                    NewExpiry.Category = "No Category";
+                }
+                else
+                {
+                    NewExpiry.Category = pickCategory.SelectedItem.ToString();
+                }
+
+                await eDatabase.SaveExpiryAsync(NewExpiry);
+            }
 
             _ = RefreshDataAsync();
         }

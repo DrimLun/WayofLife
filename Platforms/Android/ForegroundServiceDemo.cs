@@ -28,13 +28,12 @@ namespace WayofLife.Platforms.Android
                 CreateNotificationChannel(notifcationManager);
             }
 
-            var notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+            var notification = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID);
             notification.SetAutoCancel(true);
             notification.SetOngoing(true);
-            notification.SetSmallIcon(Resource.Mipmap.appicon);
 
             await RFExpiry();
-            notification.SetContentTitle("ForegroundService");
+            notification.SetContentTitle("Motivational Quote");
             notification.SetContentText(selectedQuote);
             StartForeground(NOTIFICATION_ID, notification.Build());
         }

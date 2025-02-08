@@ -9,8 +9,8 @@
         <ResourceDictionary>
             <local:GreaterThanConverter x:Key="GreaterThanConverter" />
 
-            <Style x:Key="LabelStyle" TargetType="Entry">
-                <Setter Property="Margin" Value="15, 0, 10, 10" />
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="Margin" Value="10, 0, 10, 10" />
             </Style>
 
             <Style x:Key="EntryStyle" TargetType="Entry">
@@ -77,7 +77,7 @@
                                         <Label Text="{Binding Name}" />
                                     </StackLayout>
 
-                                    <Label Style="{Binding LabelStyle}" Text="{Binding Category}" />
+                                    <Label Style="{StaticResource LabelStyle}" Text="{Binding Category}" />
 
                                     <Label Text="{Binding ExpiryDateTime}" />
 
@@ -119,6 +119,7 @@
                     Margin="20,0,10,0"
                     Clicked="ClearButton_Clicked"
                     HorizontalOptions="Center"
+                    IsEnabled="false"
                     Text="Clear"
                     VerticalOptions="Center" />
 

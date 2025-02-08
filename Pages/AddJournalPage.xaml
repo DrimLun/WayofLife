@@ -7,17 +7,26 @@
     <ScrollView>
         <VerticalStackLayout Padding="35">
             <Label
+                FontSize="Title"
                 HorizontalOptions="Center"
                 Text="New Journal"
                 VerticalOptions="Center" />
 
             <VerticalStackLayout>
-                <Entry x:Name="enTitle" Placeholder="Title" />
+                <Entry
+                    x:Name="enTitle"
+                    Placeholder="Title"
+                    Style="{StaticResource EntryStyle}" />
 
-                <Label Text="Category" />
-                <Picker x:Name="enCategory" />
+                <Label Style="{StaticResource LabelStyle}" Text="Category" />
+                <Picker x:Name="enCategory" Style="{StaticResource PickerStyle}" />
 
-                <Entry x:Name="enContent" Placeholder="Write something important" />
+                <Editor
+                    x:Name="enContent"
+                    MaxLength="300"
+                    MaximumWidthRequest="600"
+                    MinimumHeightRequest="300"
+                    Placeholder="Write something important" />
 
                 <!--<Button
                     x:Name="BtnAddImages"
@@ -27,11 +36,49 @@
                 <Button
                     x:Name="BtnAddJournal"
                     Clicked="BtnAddJournal_Clicked"
-                    Text="Add Journal" />
+                    HorizontalOptions="Center"
+                    Text="Add Journal"
+                    VerticalOptions="EndAndExpand" />
 
                 <Label x:Name="lblimagePreview" />
-                <Image x:Name="imagePreview" MaximumHeightRequest="700" />
+                <!--<Image x:Name="imagePreview" MaximumHeightRequest="700" />-->
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="Margin" Value="15, 0, 10, 10" />
+                <Setter Property="MaximumWidthRequest" Value="600" />
+            </Style>
+
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="MaximumWidthRequest" Value="600" />
+            </Style>
+
+            <Style x:Key="PickerStyle" TargetType="Picker">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="MaximumWidthRequest" Value="600" />
+            </Style>
+
+            <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+                <Setter Property="Margin" Value="10, 0, 10, 20" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="MaximumWidthRequest" Value="600" />
+            </Style>
+
+            <Style x:Key="StackLayoutStyle" TargetType="VerticalStackLayout">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="Margin" Value="20, 0, 20, 0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 </ContentPage>

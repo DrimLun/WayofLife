@@ -64,8 +64,8 @@ public partial class AddJournalPage : ContentPage
 
             var stream = await results!.OpenReadAsync();
 
-            //imagePreview = stream.Im
-            imagePreview.Source = ImageSource.FromStream(() => stream);
+            //imagePreview = stream.Im //Practice code
+            //imagePreview.Source = ImageSource.FromStream(() => stream);
 
             //var customFileType
             lblimagePreview.Text = "Image Preview:";
