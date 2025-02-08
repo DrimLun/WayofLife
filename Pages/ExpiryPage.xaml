@@ -11,6 +11,8 @@
 
             <Style x:Key="LabelStyle" TargetType="Label">
                 <Setter Property="Margin" Value="10, 0, 10, 10" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
             </Style>
 
             <Style x:Key="EntryStyle" TargetType="Entry">
@@ -28,7 +30,7 @@
             <Style x:Key="StackLayoutStyle" TargetType="VerticalStackLayout">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="Margin" Value="20, 0, 20, 0" />
+                <Setter Property="Margin" Value="50, 0, 50, 0" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -39,13 +41,13 @@
                 <Style TargetType="StackLayout">
                     <Style.Triggers>
                         <DataTrigger
-                            Binding="{Binding Width, Source={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource GreaterThanConverter}, ConverterParameter=800}"
+                            Binding="{Binding Width, Source={RelativeSource AncestorType={x:Type Window}}, Converter={StaticResource GreaterThanConverter}, ConverterParameter=700}"
                             TargetType="StackLayout"
                             Value="True">
                             <Setter Property="Orientation" Value="Horizontal" />
                             <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                             <Setter Property="MinimumHeightRequest" Value="500" />
-                            <Setter Property="MinimumWidthRequest" Value="500" />
+                            <Setter Property="MinimumWidthRequest" Value="600" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -71,7 +73,7 @@
                                 <!--  ViewCell can only contain one "StackLayout"  -->
                                 <StackLayout>
 
-                                    <StackLayout Padding="10" Orientation="Horizontal">
+                                    <StackLayout Padding="5" Orientation="Horizontal">
                                         <Label Text="{Binding Id}" />
                                         <Label Text=". " />
                                         <Label Text="{Binding Name}" />
